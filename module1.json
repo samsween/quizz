@@ -1,0 +1,50 @@
+[
+  {
+    "question": "What component of modern access controls determines what rights a user should have on each resource?",
+    "answer": "B"
+  },
+  {
+    "question": "After implementing the National Institute of Standards and Technology (NIST) Cybersecurity Framework, the chief information security officer (CISO) is assessing the company's security posture to identify deficiencies from the framework's recommendations. What process can the CISO run to get a better sense of what the company needs to improve upon?",
+    "answer": "D"
+  },
+  {
+    "question": "After a server outage due to a security breach, a company has taken several steps to recover from the incident. They have restored critical data from the latest backups and applied urgent security patches to address the exploited vulnerabilities. The security team has updated the incident response plan to incorporate lessons learned from the breach. What category of security control functional type BEST describes the function of these recent implementations?",
+    "answer": "A"
+  },
+  {
+    "question": "After a company hires a new chief information security officer (CISO), the chief executive officer (CEO) requests the CISO to hire staff for the new team. The purview of the team will be for monitoring and protecting critical information assets throughout the company. What BEST describes the location of this new team within the structure of the company?",
+    "answer": "A"
+  },
+  {
+    "question": "A medium-sized mechanical engineering firm wants to better define the account creation process during the onboarding of new hires. It is looking to ensure that the new hires have the right programs, file permissions, and security controls completed ahead of time through automation. What modern access control implementation would aid the company’s account creation process?",
+    "answer": "A"
+  },
+  {
+    "question": "A newly hired chief information security officer (CISO) met with the human resources (HR) department to discuss how to better secure the company’s access to sensitive information. In what way does this meeting fall under the responsibility of the new CISO?",
+    "answer": "B"
+  },
+  {
+    "question": "A small business owner is concerned that, despite having permissions set on a shared drive, they couldn't determine who deleted an important file. An IT engineer recommends enabling file auditing to ensure all user actions are tracked and recorded. What security principle does this support?",
+    "answer": "C"
+  },
+  {
+    "question": "An information technology manager audited the company's support tickets and decided to implement a new standard operating procedure. The manager noticed a trend with the tickets, where the majority were for new computer setups. What security control function would the manager's implementation of a new standard operating procedure have?",
+    "answer": "C"
+  },
+  {
+    "question": "A newly hired chief information security officer (CISO) is implementing the National Institute of Standards and Technology (NIST) Cybersecurity Framework. What first function would help the CISO better develop the company's security policies, such as acceptable use policy (AUP), and build out recommendations for security controls?",
+    "answer": "B"
+  },
+  {
+    "question": "After a recent server outage, the company discovered an employee accidentally unplugged the power cable from a server housed in an unsecured closet. What security control did the company lack that led to the server outage?",
+    "answer": "D"
+  },
+  {
+    "question": "An information technology (IT) department is growing to a size where there is a need for a new group to manage security. The chief executive officer (CEO) wants to hire a new executive officer for the role and split it into its own department, separate from the IT department. The CEO should hire for which position?",
+    "answer": "D"
+  },
+  {
+    "question": "An engineer for a small company is trying to explain the importance of security to the company's owner. The owner feels the company does not need permissions added to the shared drive containing highly sensitive information. What security concept means that information can only be read by people who have been explicitly authorized to access it?",
+    "answer": "A"
+  }
+]
