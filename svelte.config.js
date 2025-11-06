@@ -1,13 +1,19 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
+
+const dev = process.argv.includes('dev'); // true on `npm run dev`
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	kit: {
-		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: adapter()
-	}
+  kit: {
+    adapter: adapter({
+      // create a SPA fallback so refresh/deep links like /quiz/ethernet work
+      fallback: '200.html'
+    }),
+    // if you’re deploying to https://USERNAME.github.io/REPO, set a base path:
+    paths: {
+      base: dev ? '' : '/quizz' // <<< change to your repo name
+    }
+  }
 };
 
 export default config;

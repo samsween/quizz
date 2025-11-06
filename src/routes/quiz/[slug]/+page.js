@@ -6,3 +6,4 @@ export function load({ params }) {
   if (!quiz) throw error(404, 'Quiz not found');
   return { quiz };
 }
+export const prerender = false;
