@@ -171,9 +171,6 @@
       </div>
     </article>
 
-    <footer class="hint">
-      <span>Tip:</span> Press <kbd>1–9</kbd> to toggle answers, <kbd>Enter</kbd> to {answered ? "continue" : "submit"}.
-    </footer>
   {:else}
     <article class="result">
       <h2>🎉 Quiz complete</h2>

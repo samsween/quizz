@@ -28,11 +28,6 @@
           {#if q.description}<p class="desc">{q.description}</p>{/if}
         </div>
 
-        <div class="cta">
-          <a class="btn primary" href={`/quiz/${q.slug}`} on:click|stopPropagation>
-            Start
-          </a>
-        </div>
       </article>
     {/each}
   </section>
