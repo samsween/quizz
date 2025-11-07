@@ -10,16 +10,17 @@
     return a;
   };
 
-
   const currentQuestions = shuffleArray(questions);
 
   let currentIndex = 0;
-  let selected = [];       
+  let selected = [];
   let feedback = "";
   let score = 0;
   let finished = false;
   let answered = false;
 
+
+  let history = [];
 
   const total = currentQuestions.length;
 
@@ -27,7 +28,6 @@
     q.correct.map((c) => c.trim()).includes(answer.trim());
 
   const correctSetFor = (q) => new Set(q.correct.map((c) => c.trim()));
-
   const selectedSet = () => new Set(selected.map((s) => s.trim()));
 
   function toggleAnswer(answer) {
@@ -53,6 +53,11 @@
       feedback = `❌ Not quite. Correct: ${[...correctSet].join(", ")}`;
     }
     answered = true;
+
+    history[currentIndex] = {
+      selected: [...selected],
+      correct: [...current.correct]
+    };
   }
 
   function nextQuestion() {
@@ -63,12 +68,11 @@
       feedback = "";
       answered = false;
     } else {
-      finished = true; 
+      finished = true;
     }
   }
 
   function restart() {
-
     const reshuffled = shuffleArray(questions);
     currentQuestions.splice(0, currentQuestions.length, ...reshuffled);
     currentIndex = 0;
@@ -77,6 +81,7 @@
     score = 0;
     finished = false;
     answered = false;
+    history = [];
   }
 
   function onKey(e) {
@@ -174,24 +179,49 @@
       <p class="final">You scored <strong>{score}</strong> out of <strong>{total}</strong>.</p>
       <button class="btn primary" on:click={restart}>Restart</button>
     </article>
+
+
     <section class="review-list" aria-label="Review answers">
       {#each currentQuestions as q, qi}
         <article class="card review-card">
           <h3 class="review-q">Q{qi + 1}. {q.question}</h3>
+
+          {#if history[qi]?.selected}
+            {#if history[qi].selected.some(a => !isCorrectAnswer(a, q))}
+              <p class="your-picks-line">
+                Your wrong pick{history[qi].selected.filter(a => !isCorrectAnswer(a, q)).length > 1 ? 's' : ''}:
+                <span class="chips">
+                  {#each history[qi].selected.filter(a => !isCorrectAnswer(a, q)) as wp}
+                    <span class="chip chip-wrong">{wp}</span>
+                  {/each}
+                </span>
+              </p>
+            {/if}
+          {/if}
+
           <ul class="answers review" role="list">
             {#each q.answers as a, ai}
-              <li>
-                <div
-                  class="answer readonly {isCorrectAnswer(a, q) ? 'is-correct' : ''}"
-                  aria-label={isCorrectAnswer(a, q) ? 'Correct answer' : 'Answer'}
-                >
-                  <span class="index">{ai + 1}</span>
-                  <span class="label">{a}</span>
-                  {#if isCorrectAnswer(a, q)}
-                    <span class="mark" aria-hidden="true">✔</span>
-                  {/if}
-                </div>
-              </li>
+              {#key a}
+                <li>
+                  <div
+                    class="answer readonly
+                      {isCorrectAnswer(a, q) ? 'is-correct' : ''}
+                      {history[qi]?.selected?.includes(a) && !isCorrectAnswer(a, q) ? 'is-picked-wrong' : ''}"
+                    aria-label={isCorrectAnswer(a, q) ? 'Correct answer' : (history[qi]?.selected?.includes(a) ? 'Your pick' : 'Answer')}
+                  >
+                    <span class="index">{ai + 1}</span>
+                    <span class="label">{a}</span>
+
+                    {#if isCorrectAnswer(a, q)}
+                      <span class="mark" aria-hidden="true">✔</span>
+                    {:else if history[qi]?.selected?.includes(a)}
+                      <span class="mark" aria-hidden="true">✖</span>
+                    {/if}
+
+                  
+                  </div>
+                </li>
+              {/key}
             {/each}
           </ul>
         </article>
@@ -208,7 +238,7 @@
     --card-border: rgba(255,255,255,0.12);
     --text: #e6e9f2;
     --muted: #9aa3b2;
-    --primary: #7c9cff;   
+    --primary: #7c9cff;
     --primary-strong: #547bff;
     --success: #31d0aa;
     --danger: #ff6b6b;
@@ -345,20 +375,13 @@
     border: 1px solid rgba(124,156,255,.35);
   }
   .answer .label { line-height: 1.35; }
-
-  .answer .mark {
-    font-weight: 900;
-    opacity: .95;
-  }
-
+  .answer .mark { font-weight: 900; opacity: .95; }
 
   .answer.is-selected {
     background: linear-gradient(180deg, rgba(124,156,255,.12), rgba(124,156,255,.06));
     border-color: var(--primary);
     box-shadow: 0 6px 18px rgba(124,156,255,.25);
   }
-
-
   .answer.is-correct {
     background: linear-gradient(180deg, rgba(49,208,170,.16), rgba(49,208,170,.06));
     border-color: rgba(49,208,170,.6);
@@ -369,24 +392,51 @@
     animation: shake .22s ease-in-out 0s 1;
   }
 
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    35% { transform: translateX(-5px); }
-    70% { transform: translateX(4px); }
+  /* Review: user's wrong picks */
+  .answer.is-picked-wrong {
+    border-color: rgba(231, 75, 75, .85);
+    background: linear-gradient(180deg, rgba(231,75,75,.18), rgba(231,75,75,.06));
+    position: relative;
+  }
+  .tag {
+    margin-left: .5rem;
+    padding: .1rem .45rem;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 700;
+    border: 1px solid var(--card-border);
+    background: rgba(255,255,255,.08);
+  }
+  .tag-wrong {
+    border-color: rgba(231, 75, 75, .65);
+    background: rgba(231, 75, 75, .18);
+    color: #ffecec;
+  }
+
+  .chips { display: inline-flex; gap: .35rem; flex-wrap: wrap; }
+  .chip {
+    display: inline-flex; align-items: center; gap: .35rem;
+    padding: .15rem .5rem; border-radius: 999px;
+    font-size: .78rem; font-weight: 700;
+    border: 1px solid var(--card-border);
+    background: rgba(255,255,255,.06);
+  }
+  .chip-wrong {
+    border-color: rgba(231, 75, 75, .65);
+    background: rgba(231, 75, 75, .18);
+    color: #ffecec;
+  }
+  .your-picks-line {
+    margin: 0 0 .5rem;
+    color: var(--muted);
+    font-size: .95rem;
   }
 
   .actions {
     margin-top: 1.1rem;
-    display: flex;
-    align-items: center;
-    gap: .9rem;
-    flex-wrap: wrap;
+    display: flex; align-items: center; gap: .9rem; flex-wrap: wrap;
   }
-  .feedback {
-    margin: 0 .25rem 0 0;
-    font-weight: 600;
-    color: var(--muted);
-  }
+  .feedback { margin: 0 .25rem 0 0; font-weight: 600; color: var(--muted); }
 
   .btn {
     border: 1px solid var(--card-border);
@@ -408,27 +458,11 @@
 
   .btn.primary {
     background: linear-gradient(90deg, var(--primary), var(--primary-strong));
-    color: white;
-    border-color: transparent;
+    color: white; border-color: transparent;
   }
   .btn.success {
     background: linear-gradient(90deg, var(--success), #25c7b0);
-    color: #06211b;
-    border-color: transparent;
-  }
-
-  .hint {
-    width: min(880px, 100%);
-    color: var(--muted);
-    display: flex; gap: .5rem; align-items: baseline;
-  }
-  .hint kbd {
-    font-family: ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    border: 1px solid var(--card-border);
-    background: var(--bg-soft);
-    padding: .1rem .35rem;
-    border-radius: 6px;
-    font-size: .85em;
+    color: #06211b; border-color: transparent;
   }
 
   .result {
@@ -442,25 +476,12 @@
   }
   .final { color: var(--muted); margin: .4rem 0 1rem; }
 
-  /* --- Review section additions --- */
   .review-list {
     width: min(880px, 100%);
-    display: grid;
-    gap: 1rem;
+    display: grid; gap: 1rem;
   }
-  .review-card .review-q {
-    margin: 0 0 .6rem;
-    font-size: 1.05rem;
-  }
-  .answers.review {
-    grid-template-columns: 1fr; 
-  }
-  .answer.readonly {
-    cursor: default;
-  }
-  .answer.readonly:hover {
-    transform: none;
-    box-shadow: 0 3px 14px rgba(0,0,0,.08);
-    border-color: var(--card-border);
-  }
+  .review-card .review-q { margin: 0 0 .6rem; font-size: 1.05rem; }
+  .answers.review { grid-template-columns: 1fr; }
+  .answer.readonly { cursor: default; }
+  .answer.readonly:hover { transform: none; box-shadow: 0 3px 14px rgba(0,0,0,.08); border-color: var(--card-border); }
 </style>
