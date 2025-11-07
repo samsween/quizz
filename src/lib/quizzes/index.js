@@ -57,10 +57,10 @@ const finalQuiz = {
 
 export const quizzes = {
   [ethernet.slug]: ethernet,
-  [buildNetworkQuiz.slug]: buildNetworkQuiz,
   [communicateQuiz.slug]: communicateQuiz,
   [ipQuiz.slug]: ipQuiz,
   [networkQuiz.slug]: networkQuiz,
+  [buildNetworkQuiz.slug]: buildNetworkQuiz,
   [finalQuiz.slug]: finalQuiz
 };
 

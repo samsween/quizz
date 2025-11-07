@@ -13,7 +13,7 @@
     {#each quizzes as q}
       <article
         class="qcard"
-        on:click={() => (window.location.href = `/quiz/${q.slug}`)}
+        on:click={() => (window.location.href = `/quizz/quiz/${q.slug}`)}
       >
         <div class="thumb">
           {#if q.image}
