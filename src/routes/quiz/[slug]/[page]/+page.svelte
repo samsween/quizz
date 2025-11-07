@@ -5,6 +5,7 @@
 
   export let data;
   const { quiz, page, totalPages, questions } = data;
+  console.log(page)
 
   const prevLink = page > 1 ? `/quiz/${quiz.slug}/${page - 1}` : null;
   const nextLink = page < totalPages ? `/quiz/${quiz.slug}/${page + 1}` : null;

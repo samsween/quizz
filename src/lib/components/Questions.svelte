@@ -78,7 +78,7 @@
         prev[`${slug}-${page}`] = score;
         localStorage.setItem("prev-score", JSON.stringify(prev))
       } else {
-        localStorage.setItem("prev-score", JSON.stringify({[slug]: score}))
+        localStorage.setItem("prev-score", JSON.stringify({[`${slug}-${page}`]: score}))
       }
     }
   }
