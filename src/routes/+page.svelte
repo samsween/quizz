@@ -1,13 +1,12 @@
 <script>
     import { listQuizzes } from "$lib/quizzes";
-  import { base } from '$app/paths';
   const quizzes = listQuizzes();
 </script>
 
 <div class="lp-root">
   <header class="lp-header">
-    <h1>Welcome to the Quiz Hub</h1>
-    <p class="sub">Choose a quiz to get started!</p>
+    <h1>You will fail unless you study</h1>
+    <p class="sub">Made by sweenmachine</p>
   </header>
 
   <section class="grid">
