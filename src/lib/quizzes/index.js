@@ -4,6 +4,7 @@ import { questions as communicateQuestions } from '$lib/COMMUNICATE';
 import { questions as ipQuestions } from '$lib/IPADDR';
 import { questions as networkQuestions } from '$lib/NETWORK';
 import { questions as ethernetQuestions } from '$lib/ETHERNET';
+import {questions as finalQuestions} from "$lib/FINAL";
 
 // Define each quiz as an object with consistent structure
 const ethernet = {
@@ -44,6 +45,14 @@ const networkQuiz = {
   description: 'The core principles of how networks connect and operate.',
   image: null,
   questions: networkQuestions
+};
+
+const finalQuiz = {
+  title: 'Final QuiZ',
+  slug: 'final-quiz',
+  description: 'All questions for final exam',
+  image: null,
+  questions: finalQuestions
 };
 
 // Register all quizzes
