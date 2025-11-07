@@ -8,7 +8,7 @@ import {questions as finalQuestions} from "$lib/FINAL";
 
 
 const ethernet = {
-  title: 'Ethernet',
+  title: 'Checkpoint Exam: Ethernet Concepts Exam',
   slug: 'ethernet-basics',
   description: 'Learn about Ethernet standards, speeds, and cables.',
   image: null,
@@ -16,7 +16,7 @@ const ethernet = {
 };
 
 const buildNetworkQuiz = {
-  title: 'Building a Network',
+  title: 'Checkpoint Exam: Building and Securing a Small Network',
   slug: 'build-network',
   description: 'Learn how to plan and assemble a small business network.',
   image: null,
@@ -24,7 +24,7 @@ const buildNetworkQuiz = {
 };
 
 const communicateQuiz = {
-  title: 'Communicate Effectively',
+  title: 'Checkpoint Exam: Communicating Between Networks Exam',
   slug: 'communicate',
   description: 'Networking fundamentals and communication protocols.',
   image: null,
@@ -32,7 +32,7 @@ const communicateQuiz = {
 };
 
 const ipQuiz = {
-  title: 'IP Addressing',
+  title: 'Checkpoint Exam: IP Addressing Exam',
   slug: 'ip-addressing',
   description: 'Understand IPv4 addressing, subnetting, and masks.',
   image: null,
@@ -40,7 +40,7 @@ const ipQuiz = {
 };
 
 const networkQuiz = {
-  title: 'Network Basics',
+  title: 'Checkpoint Exam: Network Application Communications Exam',
   slug: 'network-basics',
   description: 'The core principles of how networks connect and operate.',
   image: null,
