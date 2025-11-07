@@ -6,7 +6,7 @@ function raw() {
 		if (el.querySelectorAll('ul > li').length < 2) {
 			const q = el.querySelector('.wpProQuiz_question_text').innerText;
 			const a = ["Select this to get it right"];
-			const c = ["select this to get it right"];
+			const c = ["Select this to get it right"];
 			const i = el.querySelector('img')?.src;
 			return {question: q, answers: a, correct: c, img: i }
 		} else {

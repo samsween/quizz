@@ -120,7 +120,7 @@
       {/if}
 
       <ul class="answers" role="list">
-        {#each currentQuestions[currentIndex].answers as answer, i}
+        {#each shuffleArray(...currentQuestions[currentIndex].answers) as answer, i}
           {#key answer}
             <li>
               <button
