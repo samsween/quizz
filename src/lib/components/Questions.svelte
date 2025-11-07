@@ -1,5 +1,7 @@
 <script>
   export let questions = [];
+  export let slug = "";
+  export let page = "";
 
   const shuffleArray = (arr) => {
     const a = [...arr];
@@ -70,6 +72,14 @@
       answered = false;
     } else {
       finished = true;
+      let prev = localStorage.getItem("prev-score");
+      if (prev) {
+        prev = JSON.parse(prev);
+        prev[`${slug}-${page}`] = score;
+        localStorage.setItem("prev-score", JSON.stringify(prev))
+      } else {
+        localStorage.setItem("prev-score", JSON.stringify({[slug]: score}))
+      }
     }
   }
 

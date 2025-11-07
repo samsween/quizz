@@ -1,10 +1,10 @@
 
-import { questions as buildNetwork } from '$lib/BUILDNETWORK';
-import { questions as communicateQuestions } from '$lib/COMMUNICATE';
-import { questions as ipQuestions } from '$lib/IPADDR';
-import { questions as networkQuestions } from '$lib/NETWORK';
-import { questions as ethernetQuestions } from '$lib/ETHERNET';
-import {questions as finalQuestions} from "$lib/FINAL";
+import { questions as buildNetwork } from '$lib/quizzes/BUILDNETWORK';
+import { questions as communicateQuestions } from '$lib/quizzes/COMMUNICATE';
+import { questions as ipQuestions } from '$lib/quizzes/IPADDR';
+import { questions as networkQuestions } from '$lib/quizzes/NETWORK';
+import { questions as ethernetQuestions } from '$lib/quizzes/ETHERNET';
+import {questions as finalQuestions} from "$lib/quizzes/FINAL";
 
 
 const ethernet = {

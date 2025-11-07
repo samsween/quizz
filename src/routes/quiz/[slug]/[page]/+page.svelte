@@ -26,8 +26,7 @@
     </nav>
   </header>
 
-  <!-- Your quiz section (keeps its own styles) -->
-  <Questions {questions} />
+  <Questions {questions} slug={quiz.slug} page={page} />
 </div>
 
 <style>

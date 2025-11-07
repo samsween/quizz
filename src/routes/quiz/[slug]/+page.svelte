@@ -3,6 +3,8 @@
   import { base } from '$app/paths';
   export let data;
   const { quiz } = data; // quiz.title, quiz.slug, quiz.chunksCount
+
+  const prevScores = JSON.parse(localStorage.getItem("prev-score"))
 </script>
 
 <div class="lp-root">
@@ -17,11 +19,19 @@
   <section class="grid">
     {#each Array.from({ length: quiz.chunksCount }) as _, i}
       <article class="qcard"
-       on:click={() => (window.location.href = `/quizz/quiz/${quiz.slug}/${i + 1}`)}
+       on:click={() => (window.location.href = `/quiz/${quiz.slug}/${i + 1}`)}
       >
         <div class="body">
           <h3 class="title">Section {i + 1}</h3>
-          <p class="desc">Questions {(i*20)+1}–{Math.min((i+1)*20, quiz.questions?.length || (i+1)*20)}</p>
+          <div class="footer">
+    <p class="desc">Questions {(i*20)+1}-{Math.min((i+1)*20, quiz.questions?.length || (i+1)*20)}</p>
+          {#if prevScores && prevScores[`${quiz.slug}-${i+1}`]}
+          <p class="desc">Last score <span class="score">{prevScores[`${quiz.slug}-${i+1}`]}/{Math.min((i+1)*20, quiz.questions?.length || (i+1)*20) - (i * 20)  }</span></p> 
+          {:else}
+            <p class="desc">Not completed yet </p>
+          {/if}
+          </div>
+      
         </div>
       </article>
     {/each}
@@ -43,6 +53,15 @@
     --radius: 18px;
     --transition: 180ms cubic-bezier(.2,.8,.2,1);
   }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .score {
+    color: green;
+  }
+
 
   * { box-sizing: border-box; }
   .lp-root {
