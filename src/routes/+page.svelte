@@ -1,6 +1,6 @@
 <script>
     import { listQuizzes } from "$lib/quizzes";
-
+  import { base } from '$app/paths';
   const quizzes = listQuizzes();
 </script>
 
@@ -30,7 +30,7 @@
         </div>
 
         <div class="cta">
-          <a class="btn primary" href={`/quiz/${q.slug}`} on:click|stopPropagation>
+          <a class="btn primary" href={`${base}/quiz/${q.slug}`} on:click|stopPropagation>
             Start
           </a>
         </div>

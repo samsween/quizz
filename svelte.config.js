@@ -1,19 +1,15 @@
+// svelte.config.js
 import adapter from '@sveltejs/adapter-static';
+const dev = process.argv.includes('dev');
 
-const dev = process.argv.includes('dev'); // true on `npm run dev`
-
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
+export default {
   kit: {
     adapter: adapter({
-      // create a SPA fallback so refresh/deep links like /quiz/ethernet work
-      fallback: '200.html'
+      // GitHub Pages needs 404.html for SPA fallback
+      fallback: '404.html'
     }),
-    // if you’re deploying to https://USERNAME.github.io/REPO, set a base path:
     paths: {
-      base: dev ? '' : '/quizz' // <<< change to your repo name
+      base: dev ? '' : '/quizz'   // ⬅️ repo name here
     }
   }
 };
-
-export default config;
