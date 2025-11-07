@@ -67,7 +67,6 @@
     min-height: 100vh;
     padding: 2rem 1rem 3rem;
     display: grid;
-    gap: 1rem;
     place-items: start center;
   }
 

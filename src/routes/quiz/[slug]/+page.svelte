@@ -6,14 +6,12 @@
 </script>
 
 <div class="lp-root">
-    <nav class="toolbar">
+  <header class="lp-header">
+     <nav class="toolbar">
        <button class="btn ghost" on:click={() => goto(`${base}/`)}>🏠 Home</button>
       <div class="spacer"></div>
-    
     </nav>
-  <header class="lp-header">
-    <h1>{quiz.title}</h1>
-    <p class="sub">Pick a section (20 questions per page max)</p>
+        <h1>{quiz.title}</h1>
   </header>
 
   <section class="grid">

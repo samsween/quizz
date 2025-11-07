@@ -231,10 +231,6 @@
   .quiz-root {
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
     color: var(--text);
-    background: radial-gradient(1200px 800px at 10% -20%, #20305b 0%, transparent 60%),
-                radial-gradient(1000px 700px at 110% 10%, #20305b 0%, transparent 60%),
-                var(--bg);
-    min-height: 100vh;
     padding: 2rem 1rem 3rem;
     display: grid;
     gap: 1rem;

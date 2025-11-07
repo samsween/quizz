@@ -59,7 +59,7 @@ export const questions = [
       "Select this to get it right"
     ],
     "correct": [
-      "select this to get it right"
+      "Select this to get it right"
     ],
     "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2020-01-11_180101-1536x862-1.jpg"
   },
