@@ -11,6 +11,7 @@
   };
 
   const currentQuestions = shuffleArray(questions);
+  $: randomAnswers = shuffleArray([...currentQuestions[currentIndex].answers])
 
   let currentIndex = 0;
   let selected = [];
@@ -83,13 +84,12 @@
     answered = false;
     history = [];
   }
-
+2
   function onKey(e) {
     if (finished) return;
-    const q = currentQuestions[currentIndex];
     const idx = parseInt(e.key, 10);
-    if (!Number.isNaN(idx) && idx >= 1 && idx <= q.answers.length) {
-      const answer = q.answers[idx - 1];
+    if (!Number.isNaN(idx) && idx >= 1 && idx <= randomAnswers.length) {
+      const answer = randomAnswers[idx - 1];
       toggleAnswer(answer);
     } else if (e.key === "Enter") {
       if (!answered && selected.length > 0) checkAnswer();
@@ -125,7 +125,7 @@
       {/if}
 
       <ul class="answers" role="list">
-        {#each shuffleArray([...currentQuestions[currentIndex].answers]) as answer, i}
+        {#each randomAnswers as answer, i}
           {#key answer}
             <li>
               <button
