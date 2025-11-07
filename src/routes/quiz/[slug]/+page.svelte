@@ -19,7 +19,7 @@
   <section class="grid">
     {#each Array.from({ length: quiz.chunksCount }) as _, i}
       <article class="qcard"
-       on:click={() => (window.location.href = `/quiz/${quiz.slug}/${i + 1}`)}
+       on:click={() => (window.location.href = `/quizz/quiz/${quiz.slug}/${i + 1}`)}
       >
         <div class="body">
           <h3 class="title">Section {i + 1}</h3>
