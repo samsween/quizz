@@ -29,7 +29,7 @@
         </div>
 
         <div class="cta">
-          <a class="btn primary" href={`quizz/quiz/${q.slug}`} on:click|stopPropagation>
+          <a class="btn primary" href={`/quizz/quiz/${q.slug}`} on:click|stopPropagation>
             Start
           </a>
         </div>
