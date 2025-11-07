@@ -1,2 +1,2 @@
-export const ssr = false;      // client-side routing only
-export const prerender = true; // build a static site
+export const ssr = false; 
+export const prerender = true; 

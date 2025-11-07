@@ -1,8 +1,6 @@
 <script>
-  // Props
   export let questions = [];
 
-  // --- utils ---
   const shuffleArray = (arr) => {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -12,16 +10,17 @@
     return a;
   };
 
+
   const currentQuestions = shuffleArray(questions);
 
   let currentIndex = 0;
-  let selected = [];       // selected answers (strings)
+  let selected = [];       
   let feedback = "";
   let score = 0;
   let finished = false;
   let answered = false;
 
-  // derived
+
   const total = currentQuestions.length;
 
   const isCorrectAnswer = (answer, q) =>
@@ -64,12 +63,12 @@
       feedback = "";
       answered = false;
     } else {
-      finished = true;
+      finished = true; 
     }
   }
 
   function restart() {
-    // reshuffle for a fresh run
+
     const reshuffled = shuffleArray(questions);
     currentQuestions.splice(0, currentQuestions.length, ...reshuffled);
     currentIndex = 0;
@@ -80,7 +79,6 @@
     answered = false;
   }
 
-  // keyboard accessibility: numbers toggle; Enter submits/next
   function onKey(e) {
     if (finished) return;
     const q = currentQuestions[currentIndex];
@@ -170,13 +168,35 @@
         {/if}
       </div>
     </article>
-
   {:else}
     <article class="result">
       <h2>🎉 Quiz complete</h2>
       <p class="final">You scored <strong>{score}</strong> out of <strong>{total}</strong>.</p>
       <button class="btn primary" on:click={restart}>Restart</button>
     </article>
+    <section class="review-list" aria-label="Review answers">
+      {#each currentQuestions as q, qi}
+        <article class="card review-card">
+          <h3 class="review-q">Q{qi + 1}. {q.question}</h3>
+          <ul class="answers review" role="list">
+            {#each q.answers as a, ai}
+              <li>
+                <div
+                  class="answer readonly {isCorrectAnswer(a, q) ? 'is-correct' : ''}"
+                  aria-label={isCorrectAnswer(a, q) ? 'Correct answer' : 'Answer'}
+                >
+                  <span class="index">{ai + 1}</span>
+                  <span class="label">{a}</span>
+                  {#if isCorrectAnswer(a, q)}
+                    <span class="mark" aria-hidden="true">✔</span>
+                  {/if}
+                </div>
+              </li>
+            {/each}
+          </ul>
+        </article>
+      {/each}
+    </section>
   {/if}
 </div>
 
@@ -188,7 +208,7 @@
     --card-border: rgba(255,255,255,0.12);
     --text: #e6e9f2;
     --muted: #9aa3b2;
-    --primary: #7c9cff;     /* accent */
+    --primary: #7c9cff;   
     --primary-strong: #547bff;
     --success: #31d0aa;
     --danger: #ff6b6b;
@@ -335,14 +355,14 @@
     opacity: .95;
   }
 
-  /* Selection state (pre-submit) */
+
   .answer.is-selected {
     background: linear-gradient(180deg, rgba(124,156,255,.12), rgba(124,156,255,.06));
     border-color: var(--primary);
     box-shadow: 0 6px 18px rgba(124,156,255,.25);
   }
 
-  /* Post-submit states */
+
   .answer.is-correct {
     background: linear-gradient(180deg, rgba(49,208,170,.16), rgba(49,208,170,.06));
     border-color: rgba(49,208,170,.6);
@@ -425,4 +445,26 @@
     box-shadow: var(--shadow);
   }
   .final { color: var(--muted); margin: .4rem 0 1rem; }
+
+  /* --- Review section additions --- */
+  .review-list {
+    width: min(880px, 100%);
+    display: grid;
+    gap: 1rem;
+  }
+  .review-card .review-q {
+    margin: 0 0 .6rem;
+    font-size: 1.05rem;
+  }
+  .answers.review {
+    grid-template-columns: 1fr; 
+  }
+  .answer.readonly {
+    cursor: default;
+  }
+  .answer.readonly:hover {
+    transform: none;
+    box-shadow: 0 3px 14px rgba(0,0,0,.08);
+    border-color: var(--card-border);
+  }
 </style>

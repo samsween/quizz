@@ -1,4 +1,4 @@
-// Import question arrays from your quiz modules
+
 import { questions as buildNetwork } from '$lib/BUILDNETWORK';
 import { questions as communicateQuestions } from '$lib/COMMUNICATE';
 import { questions as ipQuestions } from '$lib/IPADDR';
@@ -6,7 +6,7 @@ import { questions as networkQuestions } from '$lib/NETWORK';
 import { questions as ethernetQuestions } from '$lib/ETHERNET';
 import {questions as finalQuestions} from "$lib/FINAL";
 
-// Define each quiz as an object with consistent structure
+
 const ethernet = {
   title: 'Ethernet',
   slug: 'ethernet-basics',
@@ -55,7 +55,6 @@ const finalQuiz = {
   questions: finalQuestions
 };
 
-// Register all quizzes
 export const quizzes = {
   [ethernet.slug]: ethernet,
   [buildNetworkQuiz.slug]: buildNetworkQuiz,
@@ -65,7 +64,6 @@ export const quizzes = {
   [finalQuiz.slug]: finalQuiz
 };
 
-// Helper functions
 export function getQuiz(slug) {
   return quizzes[slug];
 }
