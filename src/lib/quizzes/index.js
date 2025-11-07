@@ -61,7 +61,8 @@ export const quizzes = {
   [buildNetworkQuiz.slug]: buildNetworkQuiz,
   [communicateQuiz.slug]: communicateQuiz,
   [ipQuiz.slug]: ipQuiz,
-  [networkQuiz.slug]: networkQuiz
+  [networkQuiz.slug]: networkQuiz,
+  [finalQuiz.slug]: finalQuiz
 };
 
 // Helper functions
