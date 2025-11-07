@@ -53,6 +53,16 @@ export const questions = [
     "img": null
   },
   {
+    "question": "Match the situation with the appropriate use of network media. ",
+    "answers": [
+      "Select this to get it right"
+    ],
+    "correct": [
+      "select this to get it right"
+    ],
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2020-01-11_180101-1536x862-1.jpg"
+  },
+  {
     "question": "A network administrator is measuring the transfer of bits across the company backbone for a mission critical financial application. The administrator notices that the network throughput appears lower than the bandwidth expected. Which three factors could influence the differences in throughput? (Choose three.)",
     "answers": [
       " the amount of traffic that is currently crossing the network",
