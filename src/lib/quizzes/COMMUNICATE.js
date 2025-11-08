@@ -184,6 +184,16 @@ export const questions = [
     "img": null
   },
   {
+    "question": "Refer to the exhibit. Match the packets with their destination IP address to the exiting interfaces on the router. (Not all targets are used.)",
+    "answers": [
+      "Select this to get it right"
+    ],
+    "correct": [
+      "Select this to get it right"
+    ],
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/CCNA-v7-Modul-8-10_Qns-15-Exten-exhibit-1594760765.9811.png"
+  },
+  {
     "question": "What information does the loopback test provide?",
     "answers": [
       " The TCP/IP stack on the device is working correctly.",
@@ -389,6 +399,16 @@ export const questions = [
     "img": null
   },
   {
+    "question": "Match the commands to the correct actions. (Not all options are used.)",
+    "answers": [
+      "Select this to get it right"
+    ],
+    "correct": [
+      "Select this to get it right"
+    ],
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_144554.jpg"
+  },
+  {
     "question": "A new network administrator has been asked to enter a banner message on a Cisco device. What is the fastest way a network administrator could test whether the banner is properly configured?",
     "answers": [
       " Reboot the device.",
@@ -401,6 +421,36 @@ export const questions = [
       " Exit privileged EXEC mode and press Enter."
     ],
     "img": null
+  },
+  {
+    "question": "A network administrator requires access to manage routers and switches locally and remotely. Match the description to the access method. (Not all options are used.)",
+    "answers": [
+      "Select this to get it right"
+    ],
+    "correct": [
+      "Select this to get it right"
+    ],
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_155949.jpg"
+  },
+  {
+    "question": "Match the phases to the functions during the boot up process of a Cisco router. (Not all options are used.)",
+    "answers": [
+      "Select this to get it right"
+    ],
+    "correct": [
+      "Select this to get it right"
+    ],
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_145029.jpg"
+  },
+  {
+    "question": "Match the command with the device mode at which the command is entered. (Not all options are used.)",
+    "answers": [
+      "Select this to get it right"
+    ],
+    "correct": [
+      "Select this to get it right"
+    ],
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_145429.jpg"
   },
   {
     "question": "What are two functions of NVRAM? (Choose two.)",
@@ -469,6 +519,16 @@ export const questions = [
       " 172.20.0.254"
     ],
     "img": "https://itexamanswers.net/wp-content/uploads/2020/01/i207589v1n1_207589.png"
+  },
+  {
+    "question": "Match the configuration mode with the command that is available in that mode. (Not all options are used.)",
+    "answers": [
+      "Select this to get it right"
+    ],
+    "correct": [
+      "Select this to get it right"
+    ],
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_145611.jpg"
   },
   {
     "question": "Which three commands are used to set up secure access to a router through a connection to the console interface? (Choose three.)",
