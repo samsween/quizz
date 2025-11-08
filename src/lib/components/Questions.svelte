@@ -1,7 +1,38 @@
 <script>
+    import { onMount } from 'svelte';
+
   export let questions = [];
   export let slug = "";
   export let page = "";
+    let confetti;
+  onMount(async () => {
+    if (typeof window !== 'undefined') {
+      const mod = await import('canvas-confetti');
+      confetti = mod.default;
+    }
+  });
+  function celebrate() {
+    if (!confetti) return;
+
+    // basic burst
+    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+
+    // side cannons
+    confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0 } });
+    confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1 } });
+
+    // a few pulses for extra joy
+    let t = 0;
+    const pulses = 4;
+    const int = setInterval(() => {
+      confetti({ particleCount: 60, spread: 70, startVelocity: 45, origin: { y: 0.6 } });
+      if (++t >= pulses) clearInterval(int);
+    }, 220);
+  }
+    $: if (finished) {
+    // slight delay lets the "Quiz complete" UI render first
+    setTimeout(celebrate, 150);
+  }
 
   const shuffleArray = (arr) => {
     const a = [...arr];
@@ -80,6 +111,13 @@
       } else {
         localStorage.setItem("prev-score", JSON.stringify({[`${slug}-${page}`]: score}))
       }
+    }
+  }
+
+  function saveQuestion() {
+    let saved = localStorage.getItem("saved-questions");
+    if (saved) {
+      saved
     }
   }
 
