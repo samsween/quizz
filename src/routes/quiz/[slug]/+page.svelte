@@ -81,7 +81,7 @@
         <article class="qcard">
           <a
             class="card-link"
-            href={`${base}/quizz/quiz/${quiz.slug}/${i + 1}`}
+            href={`${base}/quiz/${quiz.slug}/${i + 1}`}
             aria-label={`Open Section ${i + 1}`}
           >
             <div class="body">
