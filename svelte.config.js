@@ -1,15 +1,11 @@
-// svelte.config.js
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-node';
 const dev = process.argv.includes('dev');
 
 export default {
   kit: {
-    adapter: adapter({
-      // GitHub Pages needs 404.html for SPA fallback
-      fallback: '404.html'
-    }),
+    adapter: adapter(),
     paths: {
-      base: dev ? '' : '/quizz'   // ⬅️ repo name here
+      base: dev ? '' : '/quizz'
     }
   }
 };
