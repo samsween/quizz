@@ -2,6 +2,7 @@
   import Questions from '$lib/components/Questions.svelte';
   import { base } from '$app/paths';
   import { goto } from '$app/navigation';
+    import QuizRunner from '$lib/components/QuizRunner.svelte';
 
   export let data;
   const { quiz, page, totalPages, questions } = data;
@@ -27,7 +28,7 @@
     </nav>
   </header>
 
-  <Questions {questions} slug={quiz.slug} page={page} />
+  <QuizRunner {questions} slug={quiz.slug} page={page} />
 </div>
 
 <style>

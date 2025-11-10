@@ -10,7 +10,8 @@ export const questions = [
     "correct": [
       " destination IP address"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A computer has to send a packet to a destination host in the same LAN. How will the packet be sent?",
@@ -23,7 +24,8 @@ export const questions = [
     "correct": [
       " The packet will be sent directly to the destination host."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A router receives a packet from the Gigabit 0/0 interface and determines that the packet needs to be forwarded out the Gigabit 0/1 interface. What will the router do next?",
@@ -36,7 +38,8 @@ export const questions = [
     "correct": [
       " create a new Layer 2 Ethernet frame to be sent to the destination"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which IPv4 address can a host use to ping the loopback interface?",
@@ -49,7 +52,8 @@ export const questions = [
     "correct": [
       " 127.0.0.1"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A computer can access devices on the same network but cannot access devices on other networks. What is the probable cause of this problem?",
@@ -62,7 +66,8 @@ export const questions = [
     "correct": [
       " The computer has an invalid default gateway address."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which statement describes a feature of the IP protocol?",
@@ -75,7 +80,8 @@ export const questions = [
     "correct": [
       " IP relies on upper layer services to handle situations of missing or out-of-order packets."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Why is NAT not needed in IPv6?​",
@@ -88,7 +94,8 @@ export const questions = [
     "correct": [
       " Any host or user can get a public IPv6 network address because the number of available IPv6 addresses is extremely large.​"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which parameter does the router use to choose the path to the destination when there are multiple routes available?",
@@ -101,7 +108,8 @@ export const questions = [
     "correct": [
       " the lower metric value that is associated with the destination network"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What are two services provided by the OSI network layer? (Choose two.)",
@@ -116,7 +124,8 @@ export const questions = [
       " routing packets toward the destination",
       " encapsulating PDUs from the transport layer"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Within a production network, what is the purpose of configuring a switch with a default gateway address?",
@@ -129,7 +138,8 @@ export const questions = [
     "correct": [
       " The default gateway address is used to forward packets originating from the switch to remote networks."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is a basic characteristic of the IP protocol?",
@@ -142,7 +152,8 @@ export const questions = [
     "correct": [
       " connectionless"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which field in the IPv4 header is used to prevent a packet from traversing a network endlessly?",
@@ -155,7 +166,8 @@ export const questions = [
     "correct": [
       " Time-to-Live"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is one advantage that the IPv6 simplified header offers over IPv4?",
@@ -168,7 +180,8 @@ export const questions = [
     "correct": [
       " efficient packet handling"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What IPv4 header field identifies the upper layer protocol carried in the packet?",
@@ -181,17 +194,40 @@ export const questions = [
     "correct": [
       " Protocol"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
-    "question": "Refer to the exhibit. Match the packets with their destination IP address to the exiting interfaces on the router. (Not all targets are used.)",
-    "answers": [
-      "Select this to get it right"
+    "prompt": "Refer to the exhibit. Match the packets with their destination IP address to the exiting interfaces on the router. (Not all targets are used.)",
+    "pairs": [
+      {
+        "id": "0",
+        "term": "packets with destination of 172.17.6.15",
+        "desc": "FastEthernet0/0"
+      },
+      {
+        "id": "1",
+        "term": "packets with destination of 172.17.14.8",
+        "desc": "FastEthernet0/1"
+      },
+      {
+        "id": "2",
+        "term": "packets with destination of 172.17.12.10",
+        "desc": "FastEthernet1/0"
+      },
+      {
+        "id": "3",
+        "term": "packets with destination of 172.17.10.5",
+        "desc": "FastEthernet1/1"
+      },
+      {
+        "id": "4",
+        "term": "packets with destination of 172.17.8.20",
+        "desc": "Serial0/0/0"
+      }
     ],
-    "correct": [
-      "Select this to get it right"
-    ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/CCNA-v7-Modul-8-10_Qns-15-Exten-exhibit-1594760765.9811.png"
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/CCNA-v7-Modul-8-10_Qns-15-Exten-exhibit-1594760765.9811.png",
+    "type": "match"
   },
   {
     "question": "What information does the loopback test provide?",
@@ -205,7 +241,8 @@ export const questions = [
     "correct": [
       " The TCP/IP stack on the device is working correctly."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What routing table entry has a next hop address associated with a destination network?",
@@ -218,7 +255,8 @@ export const questions = [
     "correct": [
       " remote routes"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "How do hosts ensure that their packets are directed to the correct network destination?",
@@ -231,7 +269,8 @@ export const questions = [
     "correct": [
       " They have to keep their own local routing table that contains a route to the loopback interface, a local network route, and a remote default route.​"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "When transporting data from real-time applications, such as streaming audio and video, which field in the IPv6 header can be used to inform the routers and switches to maintain the same path for the packets in the same conversation?",
@@ -244,7 +283,8 @@ export const questions = [
     "correct": [
       " Flow Label"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What statement describes the function of the Address Resolution Protocol?",
@@ -257,7 +297,8 @@ export const questions = [
     "correct": [
       " ARP is used to discover the MAC address of any host on the local network."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Under which two circumstances will a switch flood a frame out of every port except the port that the frame was received on? (Choose two.)",
@@ -272,7 +313,8 @@ export const questions = [
       " The frame has the broadcast address as the destination address.",
       " The destination address is unknown to the switch."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which statement describes the treatment of ARP requests on the local link?",
@@ -285,7 +327,8 @@ export const questions = [
     "correct": [
       " They are received and processed by every device on the local network."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which destination address is used in an ARP request frame?",
@@ -299,7 +342,8 @@ export const questions = [
     "correct": [
       " FFFF.FFFF.FFFF"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A network technician issues the arp -d * command on a PC after the router that is connected to the LAN is reconfigured. What is the result after this command is issued?",
@@ -312,7 +356,8 @@ export const questions = [
     "correct": [
       " The ARP cache is cleared."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. The exhibit shows a small switched network and the contents of the MAC address table of the switch. PC1 has sent a frame addressed to PC3. What will the switch do with the frame?",
@@ -326,7 +371,8 @@ export const questions = [
     "correct": [
       " The switch will forward the frame to all ports except port 4."
     ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i275394v1n1_207267.png"
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i275394v1n1_207267.png",
+    "type": "mcq"
   },
   {
     "question": "Which two types of IPv6 messages are used in place of ARP for address resolution?",
@@ -342,7 +388,8 @@ export const questions = [
       " neighbor solicitation",
       " neighbor advertisement"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is the aim of an ARP spoofing attack?",
@@ -355,7 +402,8 @@ export const questions = [
     "correct": [
       " to associate IP addresses to the wrong MAC address"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. PC1 attempts to connect to File_server1 and sends an ARP request to obtain a destination MAC address. Which MAC address will PC1 receive in the ARP reply?",
@@ -369,7 +417,8 @@ export const questions = [
     "correct": [
       " the MAC address of the G0/0 interface on R1"
     ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2020-01-11_210907.jpg"
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2020-01-11_210907.jpg",
+    "type": "mcq"
   },
   {
     "question": "Where are IPv4 address to Layer 2 Ethernet address mappings maintained on a host computer?",
@@ -382,7 +431,8 @@ export const questions = [
     "correct": [
       " ARP cache"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What important information is examined in the Ethernet frame header by a Layer 2 device in order to forward the data onward?",
@@ -396,17 +446,30 @@ export const questions = [
     "correct": [
       " destination MAC address"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
-    "question": "Match the commands to the correct actions. (Not all options are used.)",
-    "answers": [
-      "Select this to get it right"
+    "prompt": "Match the commands to the correct actions. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "0",
+        "term": "displays a message after accessing the router",
+        "desc": "Router(config)# banner motd #"
+      },
+      {
+        "id": "1",
+        "term": "provides security on the console",
+        "desc": "Router(config-line)# password class"
+      },
+      {
+        "id": "2",
+        "term": "configures a name on the router",
+        "desc": "Router(config)# hostname CL1"
+      }
     ],
-    "correct": [
-      "Select this to get it right"
-    ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_144554.jpg"
+    "img": null,
+    "type": "match"
   },
   {
     "question": "A new network administrator has been asked to enter a banner message on a Cisco device. What is the fastest way a network administrator could test whether the banner is properly configured?",
@@ -420,37 +483,89 @@ export const questions = [
     "correct": [
       " Exit privileged EXEC mode and press Enter."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
-    "question": "A network administrator requires access to manage routers and switches locally and remotely. Match the description to the access method. (Not all options are used.)",
-    "answers": [
-      "Select this to get it right"
+    "prompt": "A network administrator requires access to manage routers and switches locally and remotely. Match the description to the access method. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "0",
+        "term": "remote access method that uses encryption",
+        "desc": "SSH"
+      },
+      {
+        "id": "1",
+        "term": "preferred out-of-band access method",
+        "desc": "console"
+      },
+      {
+        "id": "2",
+        "term": "remote access via a dialup connection",
+        "desc": "AUX"
+      },
+      {
+        "id": "3",
+        "term": "unsecure remote access",
+        "desc": "Telnet"
+      }
     ],
-    "correct": [
-      "Select this to get it right"
-    ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_155949.jpg"
+    "img": null,
+    "type": "match"
   },
   {
-    "question": "Match the phases to the functions during the boot up process of a Cisco router. (Not all options are used.)",
-    "answers": [
-      "Select this to get it right"
+    "prompt": "Match the phases to the functions during the boot up process of a Cisco router. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "0",
+        "term": "Phase 1",
+        "desc": "Perform the POST and load the bootstrap program"
+      },
+      {
+        "id": "1",
+        "term": "Phase 2",
+        "desc": "locate and load the startup configuration file"
+      },
+      {
+        "id": "2",
+        "term": "Phase 3",
+        "desc": "locate and load the Cisco IOS software"
+      }
     ],
-    "correct": [
-      "Select this to get it right"
-    ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_145029.jpg"
+    "img": null,
+    "type": "match"
   },
   {
-    "question": "Match the command with the device mode at which the command is entered. (Not all options are used.)",
-    "answers": [
-      "Select this to get it right"
+    "prompt": "Match the command with the device mode at which the command is entered. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "0",
+        "term": "service password-encryption",
+        "desc": "R1(config)#"
+      },
+      {
+        "id": "1",
+        "term": "enable",
+        "desc": "R1>"
+      },
+      {
+        "id": "2",
+        "term": "copy running-config startup-config",
+        "desc": "R1#"
+      },
+      {
+        "id": "3",
+        "term": "login",
+        "desc": "R1(config-line)#"
+      },
+      {
+        "id": "4",
+        "term": "ip address 192.168.4.4 255.255.255.0",
+        "desc": "R1(config-if)#"
+      }
     ],
-    "correct": [
-      "Select this to get it right"
-    ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_145429.jpg"
+    "img": null,
+    "type": "match"
   },
   {
     "question": "What are two functions of NVRAM? (Choose two.)",
@@ -465,7 +580,8 @@ export const questions = [
       " to retain contents when power is removed",
       " to store the startup configuration file"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A router boots and enters setup mode. What is the reason for this?",
@@ -478,7 +594,8 @@ export const questions = [
     "correct": [
       " The configuration file is missing from NVRAM."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "The global configuration command ip default-gateway 172.16.100.1 is applied to a switch. What is the effect of this command?",
@@ -491,7 +608,8 @@ export const questions = [
     "correct": [
       " The switch can be remotely managed from a host on another network."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What happens when the transport input ssh command is entered on the switch vty lines?",
@@ -504,7 +622,8 @@ export const questions = [
     "correct": [
       " Communication between the switch and remote users is encrypted."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A user PC has successfully transmitted packets to www.cisco.com. Which IP address does the user PC target in order to forward its data off the local network?",
@@ -518,17 +637,35 @@ export const questions = [
     "correct": [
       " 172.20.0.254"
     ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2020/01/i207589v1n1_207589.png"
+    "img": "https://itexamanswers.net/wp-content/uploads/2020/01/i207589v1n1_207589.png",
+    "type": "mcq"
   },
   {
-    "question": "Match the configuration mode with the command that is available in that mode. (Not all options are used.)",
-    "answers": [
-      "Select this to get it right"
+    "prompt": "Match the configuration mode with the command that is available in that mode. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "0",
+        "term": "R1>",
+        "desc": "enable"
+      },
+      {
+        "id": "1",
+        "term": "R1#",
+        "desc": "copy running-config startup-config"
+      },
+      {
+        "id": "2",
+        "term": "R1(config-line)#",
+        "desc": "login"
+      },
+      {
+        "id": "3",
+        "term": "R1(config)#",
+        "desc": "interface fastethernet 0/0"
+      }
     ],
-    "correct": [
-      "Select this to get it right"
-    ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/2024-09-17_145611.jpg"
+    "img": null,
+    "type": "match"
   },
   {
     "question": "Which three commands are used to set up secure access to a router through a connection to the console interface? (Choose three.)",
@@ -545,7 +682,8 @@ export const questions = [
       " login",
       " password cisco"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. Consider the IP address configuration shown from PC1. What is a description of the default gateway address?",
@@ -558,7 +696,8 @@ export const questions = [
     "correct": [
       " It is the IP address of the Router1 interface that connects the PC1 LAN to Router1."
     ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i206397v1n2_206397.png"
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i206397v1n2_206397.png",
+    "type": "mcq"
   },
   {
     "question": "Which two functions are primary functions of a router? (Choose two.)",
@@ -573,7 +712,8 @@ export const questions = [
       " packet forwarding",
       " path selection"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is the effect of using the Router# copy running-config startup-config command on a router?",
@@ -586,7 +726,8 @@ export const questions = [
     "correct": [
       " The contents of NVRAM will change."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What will happen if the default gateway address is incorrectly configured on a host?",
@@ -600,7 +741,8 @@ export const questions = [
     "correct": [
       " The host cannot communicate with hosts in other networks."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What are two potential network problems that can result from ARP operation? (Choose two.)",
@@ -615,7 +757,8 @@ export const questions = [
       " On large networks with low bandwidth, multiple ARP broadcasts could cause data communication delays.",
       " Network attackers could manipulate MAC address and IP address mappings in ARP messages with the intent of intercepting network traffic."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Open the PT activity. Perform the tasks in the activity instructions and then answer the question.\n\nCCNA 1 v7 Modules 8 – 10 Communicating Between Networks Exam\n\nWhich interfaces in each router are active and operational?",
@@ -628,7 +771,8 @@ export const questions = [
     "correct": [
       " R1: G0/0 and S0/0/0 R2: G0/1 and S0/0/0"
     ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/CCNA-1-v7-Modules-8-10-Communicating-Between-Networks-Exam.jpg"
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/CCNA-1-v7-Modules-8-10-Communicating-Between-Networks-Exam.jpg",
+    "type": "mcq"
   },
   {
     "question": "Which term describes a field in the IPv4 packet header used to identify the next level protocol?",
@@ -641,7 +785,8 @@ export const questions = [
     "correct": [
       " protocol"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which term describes a field in the IPv4 packet header that contains an 8-bit binary value used to determine the priority of each packet?",
@@ -654,7 +799,8 @@ export const questions = [
     "correct": [
       " differentiated services"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which term describes a field in the IPv4 packet header that contains a 32-bit binary value associated with an interface on the sending device?",
@@ -667,7 +813,8 @@ export const questions = [
     "correct": [
       " source IPv4 address"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which term describes a field in the IPv4 packet header used to detect corruption in the IPv4 header?",
@@ -680,7 +827,8 @@ export const questions = [
     "correct": [
       " header checksum"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Payroll LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nRTR1(config)# interface gi0/1\nRTR1(config-if)# description Connects to the Marketing LAN\nRTR1(config-if)# ip address 10.27.15.17 255.255.255.0\nRTR1(config-if)# no shutdown\nRTR1(config-if)# interface gi0/0\nRTR1(config-if)# description Connects to the Payroll LAN\nRTR1(config-if)# ip address 10.27.14.148 255.255.255.0\nRTR1(config-if)# no shutdown\nRTR1(config-if)# interface s0/0/0\nRTR1(config-if)# description Connects to the ISP\nRTR1(config-if)# ip address 10.14.15.254 255.255.255.0\nRTR1(config-if)# no shutdown\nRTR1(config-if)# interface s0/0/1\nRTR1(config-if)# description Connects to the Head Office WAN\nRTR1(config-if)# ip address 203.0.113.39 255.255.255.0\nRTR1(config-if)# no shutdown\nRTR1(config-if)# end",
@@ -694,7 +842,8 @@ export const questions = [
     "correct": [
       " 10.27.14.148"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which term describes a field in the IPv4 packet header that contains a unicast, multicast, or broadcast address?",
@@ -707,7 +856,8 @@ export const questions = [
     "correct": [
       " destination IPv4 address"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which term describes a field in the IPv4 packet header used to limit the lifetime of a packet?",
@@ -720,7 +870,8 @@ export const questions = [
     "correct": [
       " TTL"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which term describes a field in the IPv4 packet header that contains a 4-bit binary value set to 0100?",
@@ -733,7 +884,8 @@ export const questions = [
     "correct": [
       " version"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which term describes a field in the IPv4 packet header used to identify the next level protocol?",
@@ -746,7 +898,8 @@ export const questions = [
     "correct": [
       " protocol"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which term describes a field in the IPv4 packet header that contains a 4-bit binary value set to 0100?",
@@ -759,7 +912,8 @@ export const questions = [
     "correct": [
       " version"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What property of ARP causes cached IP-to-MAC mappings to remain in memory longer?",
@@ -772,7 +926,8 @@ export const questions = [
     "correct": [
       " Entries in an ARP table are time-stamped and are purged after the timeout expires."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What property of ARP allows MAC addresses of frequently used servers to be fixed in the ARP table?",
@@ -785,7 +940,8 @@ export const questions = [
     "correct": [
       " A static IP-to-MAC address entry can be entered manually into an ARP table."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What property of ARP allows MAC addresses of frequently used servers to be fixed in the ARP table?",
@@ -798,7 +954,8 @@ export const questions = [
     "correct": [
       " A static IP-to-MAC address entry can be entered manually into an ARP table."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What property of ARP allows hosts on a LAN to send traffic to remote networks?",
@@ -811,7 +968,8 @@ export const questions = [
     "correct": [
       " Local hosts learn the MAC address of the default gateway."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Registrar LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nFloor(config)# interface gi0/1\nFloor(config-if)# description Connects to the Registrar LAN\nFloor(config-if)# ip address 192.168.235.234 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# interface gi0/0\nFloor(config-if)# description Connects to the Manager LAN\nFloor(config-if)# ip address 192.168.234.114 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# interface s0/0/0\nFloor(config-if)# description Connects to the ISP\nFloor(config-if)# ip address 10.234.235.254 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# interface s0/0/1\nFloor(config-if)# description Connects to the Head Office WAN\nFloor(config-if)# ip address 203.0.113.3 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# end",
@@ -825,7 +983,8 @@ export const questions = [
     "correct": [
       " 192.168.235.234"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What property of ARP forces all Ethernet NICs to process an ARP request?",
@@ -838,7 +997,8 @@ export const questions = [
     "correct": [
       " The destination MAC address FF-FF-FF-FF-FF-FF appears in the header of the Ethernet frame."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What property of ARP causes a reply only to the source sending an ARP request?",
@@ -851,7 +1011,8 @@ export const questions = [
     "correct": [
       " The source MAC address appears in the header of the Ethernet frame."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What property of ARP causes the request to be flooded out all ports of a switch except for the port receiving the ARP request?",
@@ -864,7 +1025,8 @@ export const questions = [
     "correct": [
       " The destination MAC address FF-FF-FF-FF-FF-FF appears in the header of the Ethernet frame."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What property of ARP causes the NICs receiving an ARP request to pass the data portion of the Ethernet frame to the ARP process?",
@@ -877,7 +1039,8 @@ export const questions = [
     "correct": [
       " The type field 0x806 appears in the header of the Ethernet frame."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What property of ARP causes the NICs receiving an ARP request to pass the data portion of the Ethernet frame to the ARP process?",
@@ -890,7 +1053,8 @@ export const questions = [
     "correct": [
       " The type field 0x806 appears in the header of the Ethernet frame."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Service LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nMain(config)# interface gi0/1\nMain(config-if)# description Connects to the Service LAN\nMain(config-if)# ip address 172.29.157.156 255.255.255.0\nMain(config-if)# no shutdown\nMain(config-if)# interface gi0/0\nMain(config-if)# description Connects to the Engineering LAN\nMain(config-if)# ip address 172.29.156.36 255.255.255.0\nMain(config-if)# no shutdown\nMain(config-if)# interface s0/0/0\nMain(config-if)# description Connects to the ISP\nMain(config-if)# ip address 10.156.157.254 255.255.255.0\nMain(config-if)# no shutdown\nMain(config-if)# interface s0/0/1\nMain(config-if)# description Connects to the Head Office WAN\nMain(config-if)# ip address 198.51.100.177 255.255.255.0\nMain(config-if)# no shutdown\nMain(config-if)# end",
@@ -904,7 +1068,8 @@ export const questions = [
     "correct": [
       " 172.29.157.156"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Medical LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nBldgA(config)# interface gi0/1\nBldgA(config-if)# description Connects to the Medical LAN\nBldgA(config-if)# ip address 192.168.191.189 255.255.255.0\nBldgA(config-if)# no shutdown\nBldgA(config-if)# interface gi0/0\nBldgA(config-if)# description Connects to the Client LAN\nBldgA(config-if)# ip address 192.168.190.70 255.255.255.0\nBldgA(config-if)# no shutdown\nBldgA(config-if)# interface s0/0/0\nBldgA(config-if)# description Connects to the ISP\nBldgA(config-if)# ip address 10.190.191.254 255.255.255.0\nBldgA(config-if)# no shutdown\nBldgA(config-if)# interface s0/0/1\nBldgA(config-if)# description Connects to the Head Office WAN\nBldgA(config-if)# ip address 198.51.100.213 255.255.255.0\nBldgA(config-if)# no shutdown\nBldgA(config-if)# end",
@@ -918,7 +1083,8 @@ export const questions = [
     "correct": [
       " 192.168.191.189"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Registrar LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nFloor(config)# interface gi0/1\nFloor(config-if)# description Connects to the Registrar LAN\nFloor(config-if)# ip address 192.168.225.223 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# interface gi0/0\nFloor(config-if)# description Connects to the Manager LAN\nFloor(config-if)# ip address 192.168.224.103 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# interface s0/0/0\nFloor(config-if)# description Connects to the ISP\nFloor(config-if)# ip address 10.224.225.254 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# interface s0/0/1\nFloor(config-if)# description Connects to the Head Office WAN\nFloor(config-if)# ip address 203.0.113.246 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# end",
@@ -932,7 +1098,8 @@ export const questions = [
     "correct": [
       " 192.168.225.223"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Manager LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nFloor(config)# interface gi0/1\nFloor(config-if)# description Connects to the Registrar LAN\nFloor(config-if)# ip address 10.118.63.65 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# interface gi0/0\nFloor(config-if)# description Connects to the Manager LAN\nFloor(config-if)# ip address 10.118.62.196 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# interface s0/0/0\nFloor(config-if)# description Connects to the ISP\nFloor(config-if)# ip address 10.62.63.254 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# interface s0/0/1\nFloor(config-if)# description Connects to the Head Office WAN\nFloor(config-if)# ip address 209.165.200.87 255.255.255.0\nFloor(config-if)# no shutdown\nFloor(config-if)# end",
@@ -946,7 +1113,8 @@ export const questions = [
     "correct": [
       " 10.118.62.196"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Store LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nHQ(config)# interface gi0/1\nHQ(config-if)# description Connects to the Branch LAN\nHQ(config-if)# ip address 172.19.99.99 255.255.255.0\nHQ(config-if)# no shutdown\nHQ(config-if)# interface gi0/0\nHQ(config-if)# description Connects to the Store LAN\nHQ(config-if)# ip address 172.19.98.230 255.255.255.0\nHQ(config-if)# no shutdown\nHQ(config-if)# interface s0/0/0\nHQ(config-if)# description Connects to the ISP\nHQ(config-if)# ip address 10.98.99.254 255.255.255.0\nHQ(config-if)# no shutdown\nHQ(config-if)# interface s0/0/1\nHQ(config-if)# description Connects to the Head Office WAN\nHQ(config-if)# ip address 209.165.200.120 255.255.255.0\nHQ(config-if)# no shutdown\nHQ(config-if)# end",
@@ -960,7 +1128,8 @@ export const questions = [
     "correct": [
       " 172.19.98.230"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Store LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nHQ(config)# interface gi0/1\nHQ(config-if)# description Connects to the Branch LAN\nHQ(config-if)# ip address 172.20.133.132 255.255.255.0\nHQ(config-if)# no shutdown\nHQ(config-if)# interface gi0/0\nHQ(config-if)# description Connects to the Store LAN\nHQ(config-if)# ip address 172.20.132.13 255.255.255.0\nHQ(config-if)# no shutdown\nHQ(config-if)# interface s0/0/0\nHQ(config-if)# description Connects to the ISP\nHQ(config-if)# ip address 10.132.133.254 255.255.255.0\nHQ(config-if)# no shutdown\nHQ(config-if)# interface s0/0/1\nHQ(config-if)# description Connects to the Head Office WAN\nHQ(config-if)# ip address 198.51.100.156 255.255.255.0\nHQ(config-if)# no shutdown\nHQ(config-if)# end",
@@ -974,7 +1143,8 @@ export const questions = [
     "correct": [
       " 172.20.132.13"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Service LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nMain(config)# interface gi0/1\nMain(config-if)# description Connects to the Service LAN\nMain(config-if)# ip address 192.168.167.166 255.255.255.0\nMain(config-if)# no shutdown\nMain(config-if)# interface gi0/0\nMain(config-if)# description Connects to the Engineering LAN\nMain(config-if)# ip address 192.168.166.46 255.255.255.0\nMain(config-if)# no shutdown\nMain(config-if)# interface s0/0/0\nMain(config-if)# description Connects to the ISP\nMain(config-if)# ip address 10.166.167.254 255.255.255.0\nMain(config-if)# no shutdown\nMain(config-if)# interface s0/0/1\nMain(config-if)# description Connects to the Head Office WAN\nMain(config-if)# ip address 198.51.100.189 255.255.255.0\nMain(config-if)# no shutdown\nMain(config-if)# end",
@@ -988,7 +1158,8 @@ export const questions = [
     "correct": [
       " 192.168.167.166"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. A network administrator is connecting a new host to the Medical LAN. The host needs to communicate with remote networks. What IP address would be configured as the default gateway on the new host?\nBldgA(config)# interface gi0/1\nBldgA(config-if)# description Connects to the Medical LAN\nBldgA(config-if)# ip address 192.168.201.200 255.255.255.0\nBldgA(config-if)# no shutdown\nBldgA(config-if)# interface gi0/0\nBldgA(config-if)# description Connects to the Client LAN\nBldgA(config-if)# ip address 192.168.200.80 255.255.255.0\nBldgA(config-if)# no shutdown\nBldgA(config-if)# interface s0/0/0\nBldgA(config-if)# description Connects to the ISP\nBldgA(config-if)# ip address 10.200.201.254 255.255.255.0\nBldgA(config-if)# no shutdown\nBldgA(config-if)# interface s0/0/1\nBldgA(config-if)# description Connects to the Head Office WAN\nBldgA(config-if)# ip address 203.0.113.222 255.255.255.0\nBldgA(config-if)# no shutdown\nBldgA(config-if)# end",
@@ -1002,6 +1173,7 @@ export const questions = [
     "correct": [
       " 192.168.201.200"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   }
 ]

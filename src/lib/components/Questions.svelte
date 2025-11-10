@@ -14,14 +14,13 @@
   function celebrate() {
     if (!confetti) return;
 
-    // basic burst
+
     confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
 
-    // side cannons
     confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0 } });
     confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1 } });
 
-    // a few pulses for extra joy
+
     let t = 0;
     const pulses = 4;
     const int = setInterval(() => {
@@ -30,7 +29,7 @@
     }, 220);
   }
     $: if (finished) {
-    // slight delay lets the "Quiz complete" UI render first
+
     setTimeout(celebrate, 150);
   }
 
