@@ -118,6 +118,7 @@
         border-radius: 12px;
         overflow: hidden;
         border: 1px solid var(--card-border);
+        width: 100%;
     }
     .media img {
         width: 100%;
