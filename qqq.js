@@ -1,63 +1,77 @@
 
 function raw() {
 	
-const matches = [{
-	id: 14, data: [
-		{ id: '0', term: "packets with destination of 172.17.6.15", desc: "FastEthernet0/0" },
-		{ id: "1", term: "packets with destination of 172.17.14.8", desc: "FastEthernet0/1" },
-		{ id: "2", term: "packets with destination of 172.17.12.10", desc: "FastEthernet1/0" },
-		{ id: "3", term: "packets with destination of 172.17.10.5", desc: "FastEthernet1/1" },
-		{ id: "4", term: "packets with destination of 172.17.8.20", desc: "Serial0/0/0" }
+const matches = [
+	{
+		id: 5,
+		data: [
+			{id: "0", term: "192.168.1.32/27", desc: "192.168.1.48"},
+			{id: "1", term: "192.168.1.64/27", desc: "192.168.1.68"},
+			{id: "2", term: "192.168.1.96/27", desc: "192.168.1.121"}
+		]
+	}, 
+	{
+		id: 10,
+		data: [
+			{id: "0", term: "192.168.100.161/25", desc: "Host Address"},
+			{id: "1", term: "192.168.1.191/26", desc: "Broadcast Address"},
+			{id: "2", term: "10.10.10.128/25", desc: "Network Address"},
+			{id: "3", term: "203.0.113.100/24", desc: "Host Address"},
+			{id: "4", term: "172.110.12.64", desc: "Network Address"},
+			{id: "5", term: "10.0.0.159/27", desc: "Broadcast Address"},
+		]
+	},
+	{
+		id: 17,
+		data: [
+			{id: "0", term: "Network D", desc: "192.168.0.80 /30"},
+			{id: "1", term: "Network A", desc: "192.168.0.128 /25"},
+			{id: "2", term: "Network B", desc: "192.168.0.0 /26"},
+			{id: "3", term: "Network C", desc: "192.168.0.96 /27"},
+		]
+	},
+	{
+		id: 32,
+		data: [
+			{id: "0", term: "::1", desc: "loopback"},
+			{id: "1", term: "FF02::1", desc: "all node multicast"},
+			{id: "2", term: "FF02::1:FFAE:F85F", desc: "solicited node multicast"},
+			{id: "3", term: "2001:DB8::BAF:3F57:FE94", desc: "global unicast"},
+		]
+	}, 
+	{
+		id: 38,
+		data: [
+			{id: "0", term: "The IPv4 packets and IPv6 packets coexist in the same network.", desc: "dual-stack"},
+			{id: "0", term: "The IPv6 packet is transported inside an IPv4 packet.", desc: "tunneling"},
+			{id: "0", term: "IPv6 packets are converted into IPv4 packets, and vice versa.", desc: "translation"},
+		]
+	},
+	{
+		id: 46,
+		data: [
+			{id: "0", term: "a link-local address", desc: "169.254.1.5"},
+			{id: "1", term: "a TEST-NET address", desc: ""},
+			{id: "2", term: "an experimental address", desc: "240.2.6.255"},
+			{id: "3", term: "a private address", desc: "172.19.20.5"},
+			{id: "4", term: "a loopback address", desc: "127.0.0.1"},
+		]
+	}
 
-	]
-}, {
-	id: 30, data: [
-		{ id: "0", term: "displays a message after accessing the router", desc: "Router(config)# banner motd #" },
-		{ id: "1", term: "provides security on the console", desc: "Router(config-line)# password class" },
-		{ id: "2", term: "configures a name on the router", desc: "Router(config)# hostname CL1" },
-	]
-},
-{
-	id: 32, data: [
-		{ id: "0", term: "remote access method that uses encryption", desc: "SSH" },
-		{ id: "1", term: "preferred out-of-band access method", desc: "console" },
-		{ id: "2", term: "remote access via a dialup connection", desc: "AUX" },
-		{ id: "3", term: "unsecure remote access", desc: "Telnet" },
-
-	]
-},
-{
-	id: 33, data: [
-		{ id: "0", term: "Phase 1", desc: "Perform the POST and load the bootstrap program" },
-		{ id: "1", term: "Phase 2", desc: "locate and load the startup configuration file" },
-		{ id: "2", term: "Phase 3", desc: "locate and load the Cisco IOS software" },
-
-	]
-},
-{
-	id: 34, data: [
-		{ id: "0", term: "service password-encryption", desc: "R1(config)#" },
-		{ id: "1", term: "enable", desc: "R1>" },
-		{ id: "2", term: "copy running-config startup-config", desc: "R1#" },
-		{ id: "3", term: "login", desc: "R1(config-line)#" },
-		{ id: "4", term: "ip address 192.168.4.4 255.255.255.0", desc: "R1(config-if)#" },
-	]
-},
-{
-	id: 40, data: [
-		{ id: "0", term: "R1>", desc: "enable" },
-		{ id: "1", term: "R1#", desc: "copy running-config startup-config" },
-		{ id: "2", term: "R1(config-line)#", desc: "login" },
-		{ id: "3", term: "R1(config)#", desc: "interface fastethernet 0/0" },
-	]
-}]
+]
 	const raw = Array.from(document.querySelectorAll('.wpProQuiz_question'))
 	const type = "mcq";
 	const questions = raw.map((el, index) => {
-		if (el.querySelectorAll('ul > li').length < 2) {
+		if (index === 25) {
+			const question = " Consider the following range of addresses: 2001:0DB8:BC15:00A0:0000:: 2001:0DB8:BC15:00A1:0000:: 2001:0DB8:BC15:00A2:0000:: … 2001:0DB8:BC15:00AF:0000:: The prefix-length for the range of addresses is ___ "
+			const answers = ["/60"]
+			const correct = ["/60"]
+			return {question, answers, correct, img: null, type}
+		}
+		if (el.querySelectorAll('ul > li').length < 2 || el.innerHTML.includes("table")) {
 			const q = el.querySelector('.wpProQuiz_question_text').innerText;
 			const i = el.querySelector('img')?.src;
-			return { prompt: q, pairs: matches.filter(m=>m.id === index)[0].data, img: index === 14 ? i : null, type: "match" }
+			return { prompt: q, pairs: matches.filter(m=>(m.id-1) === index)[0].data, img: index === 16 ? i : null, type: "match" }
 		} else {
 			const question = el.querySelector('.wpProQuiz_question_text').innerText;
 			const answers = Array.from(el.querySelectorAll('ul > li')).map(e => e?.innerText);
