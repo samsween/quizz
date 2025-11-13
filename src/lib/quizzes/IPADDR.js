@@ -165,7 +165,7 @@ export const questions = [
       },
       {
         "id": "4",
-        "term": "172.110.12.64",
+        "term": "172.110.12.64/28",
         "desc": "Network Address"
       },
       {
