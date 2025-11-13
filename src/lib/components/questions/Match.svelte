@@ -1,16 +1,14 @@
 <script>
   import { createEventDispatcher, onMount, tick } from "svelte";
 
-  // PROPS
   export let prompt = "Match each term to its correct description";
-  export let pairs = [];            // [{ id, term, desc | description }]
+  export let pairs = [];
   export let image = null;
-  export let freeze = false;        // when true: reveal correctness
-  export let connections = [];      // [{ rightId, leftId }]; can be bound by parent
+  export let freeze = false;
+  export let connections = [];
 
   const dispatch = createEventDispatcher();
 
-  // UTIL
   const shuffle = (arr) => {
     if (!arr || !Array.isArray(arr)) return [];
     const a = [...arr];
@@ -23,15 +21,17 @@
   const letter = (i) => String.fromCharCode("A".charCodeAt(0) + i);
   const objSize = (o) => Object.keys(o).length;
 
-  // Build shuffled columns; normalize `desc`
-  const left  = shuffle(pairs ?? []).map((p, i) => ({
-    ...p, idx: i, desc: p.desc ?? p.description ?? ""
+  const left = shuffle(pairs ?? []).map((p, i) => ({
+    ...p,
+    idx: i,
+    desc: p.desc ?? p.description ?? "",
   }));
   const right = shuffle(pairs ?? []).map((p, i) => ({
-    ...p, rIdx: i, desc: p.desc ?? p.description ?? ""
+    ...p,
+    rIdx: i,
+    desc: p.desc ?? p.description ?? "",
   }));
 
-  // Helpers for id lookups
   function termById(id) {
     return (
       left.find((p) => p.id === id)?.term ??
@@ -48,19 +48,24 @@
     );
   }
 
-  // connections array <-> object map
   function objFromConnections(arr) {
     const o = {};
     for (const c of arr) o[c.rightId] = c.leftId;
     return o;
   }
 
-  // STATE (objects/arrays for easy reactivity)
-  let userMatches = objFromConnections(connections); // { [rightId]: leftId }
+  let userMatches = objFromConnections(connections);
   let selectedLeft = null;
 
-  const colors = ["#7c9cff","#31d0aa","#ffb347","#ff6b6b","#b47cff","#7cdcff"];
-  let matchColors = {}; // { [leftId]: color }
+  const colors = [
+    "#7c9cff",
+    "#31d0aa",
+    "#ffb347",
+    "#ff6b6b",
+    "#b47cff",
+    "#7cdcff",
+  ];
+  let matchColors = {};
 
   function hydrateColors() {
     const next = {};
@@ -77,14 +82,13 @@
   }
   hydrateColors();
 
-  // DOM + geometry
   let wrap;
   let svgW = 0;
   let svgH = 0;
   let lines = [];
 
-  const leftRefs = {};   // { [leftId]: HTMLElement }
-  const rightRefs = {};  // { [rightId]: HTMLElement }
+  const leftRefs = {};
+  const rightRefs = {};
 
   function storeLeft(node, id) {
     leftRefs[id] = node;
@@ -142,7 +146,10 @@
     }
 
     userMatches = { ...userMatches, [rightId]: selectedLeft };
-    connections = Object.entries(userMatches).map(([r, l]) => ({ rightId: r, leftId: l }));
+    connections = Object.entries(userMatches).map(([r, l]) => ({
+      rightId: r,
+      leftId: l,
+    }));
 
     selectedLeft = null;
     await tick();
@@ -156,16 +163,27 @@
     const { [rightId]: _, ...rest } = userMatches;
     userMatches = rest;
 
-    // prune color if this leftId is no longer used
     let stillUsed = false;
-    for (const v of Object.values(userMatches)) { if (v === leftId) { stillUsed = true; break; } }
+    for (const v of Object.values(userMatches)) {
+      if (v === leftId) {
+        stillUsed = true;
+        break;
+      }
+    }
     if (!stillUsed && leftId) deleteMatchColor(leftId);
 
-    connections = Object.entries(userMatches).map(([r, l]) => ({ rightId: r, leftId: l }));
+    connections = Object.entries(userMatches).map(([r, l]) => ({
+      rightId: r,
+      leftId: l,
+    }));
 
     await tick();
     computeLines();
     emitState();
+  }
+  function descFromId(id) {
+    const p = pairs.find((p) => p.id === id);
+    return p?.desc ?? p?.description ?? "";
   }
 
   function rightForLeft(leftId) {
@@ -176,20 +194,22 @@
   }
   function isLeftCorrect(leftId) {
     const rId = rightForLeft(leftId);
-    return !!rId && rId === leftId;
-  }
-  function isLeftWrong(leftId) {
-    const rId = rightForLeft(leftId);
-    return !!rId && rId !== leftId;
-  }
-  function isCorrectTarget(r) {
-    const chosenLeft = userMatches[r.id];
-    return !!chosenLeft && chosenLeft === r.id;
+    if (!rId) return false;
+    return descFromId(leftId) && descFromId(leftId) === descFromId(rId);
   }
 
-  // Colors:
-  // - when NOT frozen: use per-match color
-  // - when frozen: rely on .is-correct / .is-wrong classes (no inline override)
+  function isLeftWrong(leftId) {
+    const rId = rightForLeft(leftId);
+    if (!rId) return false;
+    return descFromId(leftId) && descFromId(leftId) !== descFromId(rId);
+  }
+
+  function isCorrectTarget(r) {
+    const chosenLeft = userMatches[r.id];
+    if (!chosenLeft) return false;
+    return descFromId(chosenLeft) === descFromId(r.id);
+  }
+
   $: leftColor = (leftId) => {
     if (freeze) return null;
     const rId = rightForLeft(leftId);
@@ -205,8 +225,11 @@
     if (!el || !base) return { x: 0, y: 0 };
     const r = el.getBoundingClientRect();
     const b = base.getBoundingClientRect();
-    return { x: r.left + r.width / 2 - b.left, y: r.top + r.height / 2 - b.top };
-    }
+    return {
+      x: r.left + r.width / 2 - b.left,
+      y: r.top + r.height / 2 - b.top,
+    };
+  }
 
   function computeLines() {
     if (!wrap) return;
@@ -220,10 +243,15 @@
       const a = centerOf(lEl, wrap);
       const b = centerOf(rEl, wrap);
       conns.push({
-        x1: a.x, y1: a.y, x2: b.x, y2: b.y,
+        x1: a.x,
+        y1: a.y,
+        x2: b.x,
+        y2: b.y,
         color: freeze
-          ? (rightId === leftId ? 'var(--success)' : 'var(--danger)')
-          : (matchColors[leftId] || '#7c9cff'),
+          ? rightId === leftId
+            ? "var(--success)"
+            : "var(--danger)"
+          : matchColors[leftId] || "#7c9cff",
       });
     }
     lines = conns;
@@ -246,7 +274,6 @@
     };
   });
 
-  // keep prop -> state in sync
   $: {
     const rebuilt = objFromConnections(connections);
     const changed =
@@ -261,15 +288,16 @@
     }
   }
 
-  // trigger recompute on any reactive change
-  $: (computeLines(), emitState());
+  $: computeLines(), emitState();
 </script>
 
 <article class="card match-card">
   <header class="match-header">
     <div class="flex">
       <h2 class="question">{prompt}</h2>
-      <div class="badge">Matched: {Object.keys(userMatches).length} / {right.length}</div>
+      <div class="badge">
+        Matched: {Object.keys(userMatches).length} / {right.length}
+      </div>
     </div>
 
     {#if image}
@@ -280,7 +308,11 @@
   </header>
 
   <div class="match-wrap" bind:this={wrap}>
-    <svg class="links" preserveAspectRatio="none" viewBox={`0 0 ${svgW} ${svgH}`}>
+    <svg
+      class="links"
+      preserveAspectRatio="none"
+      viewBox={`0 0 ${svgW} ${svgH}`}
+    >
       {#each lines as ln}
         <path
           d={`M ${ln.x1} ${ln.y1} C ${(ln.x1 + ln.x2) / 2} ${ln.y1}, ${(ln.x1 + ln.x2) / 2} ${ln.y2}, ${ln.x2} ${ln.y2}`}
@@ -299,22 +331,34 @@
         <ul class="bank" role="list">
           {#each left as l, i (l.id)}
             <li>
-             <button
-    type="button"
-    class="pill {selectedLeft === l.id ? 'is-selected' : ''} {freeze && isLeftCorrect(l.id) ? 'is-correct' : ''} {freeze && isLeftWrong(l.id) ? 'is-wrong' : ''} {isLeftUsed(l.id) && !freeze ? 'is-used' : ''}"
-    style:border-color={!freeze && leftColor(l.id) ? `${leftColor(l.id)} !important` : null}
-    style:background={!freeze && leftColor(l.id) ? `${leftColor(l.id)}22 !important` : null}
-    
-    disabled={freeze} 
-
-    on:click={() => pickLeft(l.id)}
-    use:storeLeft={l.id}
-    aria-pressed={selectedLeft === l.id}
-  >
+              <button
+                type="button"
+                class="pill {selectedLeft === l.id
+                  ? 'is-selected'
+                  : ''} {freeze && isLeftCorrect(l.id)
+                  ? 'is-correct'
+                  : ''} {freeze && isLeftWrong(l.id)
+                  ? 'is-wrong'
+                  : ''} {isLeftUsed(l.id) && !freeze ? 'is-used' : ''}"
+                style:border-color={!freeze && leftColor(l.id)
+                  ? `${leftColor(l.id)} !important`
+                  : null}
+                style:background={!freeze && leftColor(l.id)
+                  ? `${leftColor(l.id)}22 !important`
+                  : null}
+                disabled={freeze}
+                on:click={() => pickLeft(l.id)}
+                use:storeLeft={l.id}
+                aria-pressed={selectedLeft === l.id}
+              >
                 <span
                   class="index"
-                  style:background={!freeze && leftColor(l.id) ? `${leftColor(l.id)}22 !important` : null}
-                  style:border-color={!freeze && leftColor(l.id) ? `${leftColor(l.id)}55 !important` : null}
+                  style:background={!freeze && leftColor(l.id)
+                    ? `${leftColor(l.id)}22 !important`
+                    : null}
+                  style:border-color={!freeze && leftColor(l.id)
+                    ? `${leftColor(l.id)}55 !important`
+                    : null}
                 >
                   {letter(i)}
                 </span>
@@ -334,10 +378,17 @@
               <div
                 class="target"
                 class:is-correct={freeze && isCorrectTarget(r)}
-                class:is-wrong={freeze && userMatches[r.id] && !isCorrectTarget(r)}
-                style:border-color={!freeze && userMatches[r.id] ? `${(rightColor(r.id) ?? '#7c9cff')} !important` : null}
-                style:background={!freeze && userMatches[r.id] ? `${(rightColor(r.id) ?? '#7c9cff')}22 !important` : null}
-                on:click={() => userMatches[r.id] ? disconnect(r.id) : connectRight(r.id)}
+                class:is-wrong={freeze &&
+                  userMatches[r.id] &&
+                  !isCorrectTarget(r)}
+                style:border-color={!freeze && userMatches[r.id]
+                  ? `${rightColor(r.id) ?? "#7c9cff"} !important`
+                  : null}
+                style:background={!freeze && userMatches[r.id]
+                  ? `${rightColor(r.id) ?? "#7c9cff"}22 !important`
+                  : null}
+                on:click={() =>
+                  userMatches[r.id] ? disconnect(r.id) : connectRight(r.id)}
                 role="button"
                 tabindex="0"
                 on:keydown={(e) => {
@@ -360,14 +411,16 @@
                       style={freeze && userMatches[r.id] !== r.id
                         ? "border-color: var(--danger); background: rgba(255,107,107,0.12) !important;"
                         : !freeze
-                          ? `border-color:${rightColor(r.id) ?? '#7c9cff'} !important; background:${(rightColor(r.id) ?? '#7c9cff')}22 !important; border:2px;`
+                          ? `border-color:${rightColor(r.id) ?? "#7c9cff"} !important; background:${rightColor(r.id) ?? "#7c9cff"}22 !important; border:2px;`
                           : ""}
                     >
                       {termById(userMatches[r.id])}
                     </span>
                   {:else if !freeze}
                     <span class="hint">
-                      Click to connect {selectedLeft ? `(${termById(selectedLeft)})` : ""}
+                      Click to connect {selectedLeft
+                        ? `(${termById(selectedLeft)})`
+                        : ""}
                     </span>
                   {/if}
 
@@ -403,7 +456,10 @@
     --radius: 18px;
     --transition: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .flex { display: flex; align-items: center; }
+  .flex {
+    display: flex;
+    align-items: center;
+  }
   .card.match-card {
     width: min(880px, 100%);
     background: var(--card);
@@ -413,114 +469,273 @@
     backdrop-filter: blur(10px);
   }
   .match-header {
-    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
-    gap: 0.75rem; margin-bottom: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
   }
 
-  /* correctness visuals on FREEZE */
   .pill.is-correct {
-    background: linear-gradient(180deg, rgba(49,208,170,0.25), rgba(49,208,170,0.12)) !important;
-    border-color: rgba(49,208,170,0.9) !important;
+    background: linear-gradient(
+      180deg,
+      rgba(49, 208, 170, 0.25),
+      rgba(49, 208, 170, 0.12)
+    ) !important;
+    border-color: rgba(49, 208, 170, 0.9) !important;
     color: #06211b !important;
-    box-shadow: 0 0 10px rgba(49,208,170,0.30) !important;
+    box-shadow: 0 0 10px rgba(49, 208, 170, 0.3) !important;
   }
   .pill.is-wrong {
-    background: linear-gradient(180deg, rgba(255,107,107,0.25), rgba(255,107,107,0.12)) !important;
-    border-color: rgba(255,107,107,0.9) !important;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 107, 107, 0.25),
+      rgba(255, 107, 107, 0.12)
+    ) !important;
+    border-color: rgba(255, 107, 107, 0.9) !important;
     color: #fff !important;
-    box-shadow: 0 0 10px rgba(255,107,107,0.25) !important;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.25) !important;
   }
   .pill.is-used {
-  /* This prevents clicks */
-  pointer-events: none;
-  
-  /* This makes it look "used" or "disabled" */
-  opacity: 0.6;
-}
+    pointer-events: none;
 
-/* Optional: Prevent hover effects on used pills */
-.pill.is-used:hover {
-  transform: none;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
-  border-color: var(--card-border); 
-}
+    opacity: 0.6;
+  }
 
-/* If a color is applied, don't fade it out */
-.pill.is-used[style*="background"] {
-  opacity: 1;
-}
+  .pill.is-used:hover {
+    transform: none;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+    border-color: var(--card-border);
+  }
 
-  .question { margin: 0.2rem 0; letter-spacing: 0.2px; font-size: clamp(1.1rem, 1.2vw + 1rem, 1.5rem); }
-  .media { margin: 0.6rem 0 1.2rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); }
-  .media img { width: 100%; height: auto; display: block; }
+  .pill.is-used[style*="background"] {
+    opacity: 1;
+  }
+
+  .question {
+    margin: 0.2rem 0;
+    letter-spacing: 0.2px;
+    font-size: clamp(1.1rem, 1.2vw + 1rem, 1.5rem);
+  }
+  .media {
+    margin: 0.6rem 0 1.2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+  }
+  .media img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
   .target.is-correct {
-    background: linear-gradient(180deg, rgba(49,208,170,0.25), rgba(49,208,170,0.12)) !important;
-    border-color: rgba(49,208,170,0.9) !important;
+    background: linear-gradient(
+      180deg,
+      rgba(49, 208, 170, 0.25),
+      rgba(49, 208, 170, 0.12)
+    ) !important;
+    border-color: rgba(49, 208, 170, 0.9) !important;
     color: #06211b !important;
-    box-shadow: 0 0 10px rgba(49,208,170,0.3) !important;
+    box-shadow: 0 0 10px rgba(49, 208, 170, 0.3) !important;
   }
   .target.is-wrong {
-    background: linear-gradient(180deg, rgba(255,107,107,0.25), rgba(255,107,107,0.12)) !important;
-    border-color: rgba(255,107,107,0.9) !important;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 107, 107, 0.25),
+      rgba(255, 107, 107, 0.12)
+    ) !important;
+    border-color: rgba(255, 107, 107, 0.9) !important;
     color: #fff !important;
-    box-shadow: 0 0 10px rgba(255,107,107,0.25) !important;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.25) !important;
   }
 
   .badge {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-    border: 1px solid var(--card-border); border-radius: 999px; padding: 0.35rem 0.75rem;
-    font-weight: 600; color: var(--muted); box-shadow: var(--shadow);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.02)
+    );
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-weight: 600;
+    color: var(--muted);
+    box-shadow: var(--shadow);
   }
-  .match-wrap { position: relative; }
+  .match-wrap {
+    position: relative;
+  }
   .links {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    pointer-events: none; overflow: visible;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
   }
 
-  .match-grid { position: relative; display: grid; gap: 1rem; grid-template-columns: 1fr; margin-top: 0.4rem; }
-  @media (min-width: 800px) { .match-grid { grid-template-columns: 1fr 1fr; } }
+  .match-grid {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 0.4rem;
+  }
+  @media (min-width: 800px) {
+    .match-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 
-  .col-title { margin: 0 0 0.5rem; color: var(--muted); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.2px; }
-  .bank, .targets { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .col-title {
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+  .bank,
+  .targets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
 
   .pill {
-    width: 100%; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.7rem;
-    background: var(--bg-soft); color: var(--text);
-    border: 1px solid var(--card-border); border-radius: 12px; padding: 0.7rem 0.9rem;
-    font-weight: 600; letter-spacing: 0.2px; text-align: left;
-    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition), opacity var(--transition);
-    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08); cursor: pointer;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--bg-soft);
+    color: var(--text);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 0.7rem 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-align: left;
+    transition:
+      transform var(--transition),
+      border-color var(--transition),
+      box-shadow var(--transition),
+      background var(--transition),
+      opacity var(--transition);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
   }
-  .pill:hover { transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16), 0 0 0 6px var(--ring); }
-  .pill.is-selected { background: linear-gradient(180deg, rgba(124, 156, 255, 0.12), rgba(124, 156, 255, 0.06)); border-color: var(--primary); }
+  .pill:hover {
+    transform: translateY(-1px);
+    border-color: var(--ring);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.16),
+      0 0 0 6px var(--ring);
+  }
+  .pill.is-selected {
+    background: linear-gradient(
+      180deg,
+      rgba(124, 156, 255, 0.12),
+      rgba(124, 156, 255, 0.06)
+    );
+    border-color: var(--primary);
+  }
 
   .target {
-    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.8rem;
-    background: var(--bg-soft); color: var(--text);
-    border: 1px solid var(--card-border); border-radius: 12px; padding: 0.75rem 0.9rem;
-    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition), opacity var(--transition);
-    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08); cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--bg-soft);
+    color: var(--text);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 0.75rem 0.9rem;
+    transition:
+      transform var(--transition),
+      border-color var(--transition),
+      box-shadow var(--transition),
+      background var(--transition),
+      opacity var(--transition);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
   }
-  .target:hover { transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16), 0 0 0 6px var(--ring); }
-  .target.is-correct { background: linear-gradient(180deg, rgba(49, 208, 170, 0.16), rgba(49, 208, 170, 0.06)); border-color: rgba(49, 208, 170, 0.6); }
-  .target.is-wrong   { background: linear-gradient(180deg, rgba(255, 107, 107, 0.16), rgba(255, 107, 107, 0.06)); border-color: rgba(255, 107, 107, 0.6); }
+  .target:hover {
+    transform: translateY(-1px);
+    border-color: var(--ring);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.16),
+      0 0 0 6px var(--ring);
+  }
+  .target.is-correct {
+    background: linear-gradient(
+      180deg,
+      rgba(49, 208, 170, 0.16),
+      rgba(49, 208, 170, 0.06)
+    );
+    border-color: rgba(49, 208, 170, 0.6);
+  }
+  .target.is-wrong {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 107, 107, 0.16),
+      rgba(255, 107, 107, 0.06)
+    );
+    border-color: rgba(255, 107, 107, 0.6);
+  }
 
-  .desc { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem; align-items: center; }
+  .desc {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.6rem;
+    align-items: center;
+  }
   .index {
-    width: 28px; height: 28px; display: grid; place-items: center; border-radius: 999px;
-    font-weight: 700; font-size: 0.9rem;
-    background: rgba(124, 156, 255, 0.15); border: 1px solid rgba(124, 156, 255, 0.35);
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: rgba(124, 156, 255, 0.15);
+    border: 1px solid rgba(124, 156, 255, 0.35);
   }
-  .label { line-height: 1.35; }
+  .label {
+    line-height: 1.35;
+  }
 
-  .conn { display: inline-flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; justify-self: end; }
-  .conn-pill {
-    display: inline-flex; align-items: center; gap: 0.35rem;
-    padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
-    border: 1px solid var(--card-border); background: rgba(255, 255, 255, 0.06);
+  .conn {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-self: end;
   }
-  .hint { color: var(--muted); font-size: 0.9rem; }
-  .conn-pill.correct { border-color: var(--success); background: rgba(49, 208, 170, 0.12); font-weight: 800; }
-  .conn-pill.user { background: rgba(255, 255, 255, 0.06); }
+  .conn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid var(--card-border);
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .hint {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .conn-pill.correct {
+    border-color: var(--success);
+    background: rgba(49, 208, 170, 0.12);
+    font-weight: 800;
+  }
+  .conn-pill.user {
+    background: rgba(255, 255, 255, 0.06);
+  }
 </style>

@@ -4,7 +4,7 @@
     import Match from "./questions/Match.svelte";
 
     export let questions = [];
-    let matchConnections = []; 
+    let matchConnections = [];
     export let slug = "";
     export let page = "";
 
@@ -24,11 +24,11 @@
     let finished = false;
     let answered = false;
     let feedback = "";
-    let history = []; 
+    let history = [];
 
     const total = currentQuestions.length;
 
-    let childRef; 
+    let childRef;
     let canSubmit = false;
     let confetti;
 
@@ -75,25 +75,44 @@
         const q = currentQuestions[currentIndex];
         if (q.type === "match") {
       
-            const rightCount = q.pairs.length;
+            const getDescById = (id) => {
+                const p = q.pairs.find((x) => x.id === id);
+                return p?.desc ?? p?.description ?? "";
+            };
+
+ 
             const m = new Map(
                 matchConnections.map(({ rightId, leftId }) => [
                     rightId,
                     leftId,
                 ]),
             );
+
             let correct = 0;
+            let total = 0;
+
             q.pairs.forEach((p) => {
-                if (m.get(p.id) === p.id) correct++;
+                const leftId = m.get(p.id); 
+                if (!leftId) return; 
+                total++;
+
+                const rightDesc = getDescById(p.id);
+                const leftDesc = getDescById(leftId);
+
+                if (rightDesc && rightDesc === leftDesc) correct++;
             });
-            const isCorrect = correct === rightCount;
+
+            const isCorrect = correct === total && total > 0;
+
             feedback = isCorrect
                 ? "✅ Perfect match!"
-                : `❌ ${correct}/${rightCount} matched correctly`;
-            score += isCorrect ? 1 : 0;
+                : `❌ ${correct}/${q.pairs.length} matched correctly`;
+
+            if (isCorrect) score++;
+
             answered = true;
-            
             history[currentIndex] = { matches: matchConnections.slice() };
+            return;
         } else {
             if (!childRef || answered) return;
             const res = childRef.submit();
@@ -225,7 +244,9 @@
             {#each currentQuestions as q, qi}
                 <article class="card review-card">
                     <h3 class="review-q">
-                        Q{qi + 1}. {q?.type === "mcq" || !q?.type ? q.question  : q.prompt}
+                        Q{qi + 1}. {q?.type === "mcq" || !q?.type
+                            ? q.question
+                            : q.prompt}
                     </h3>
 
                     {#if q.type === "mcq" || !q.type}

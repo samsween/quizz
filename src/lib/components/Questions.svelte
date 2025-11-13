@@ -1,35 +1,37 @@
 <script>
-    import { onMount } from 'svelte';
+  import { onMount } from "svelte";
 
   export let questions = [];
   export let slug = "";
   export let page = "";
-    let confetti;
+  let confetti;
   onMount(async () => {
-    if (typeof window !== 'undefined') {
-      const mod = await import('canvas-confetti');
+    if (typeof window !== "undefined") {
+      const mod = await import("canvas-confetti");
       confetti = mod.default;
     }
   });
   function celebrate() {
     if (!confetti) return;
 
-
     confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
 
     confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0 } });
     confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1 } });
 
-
     let t = 0;
     const pulses = 4;
     const int = setInterval(() => {
-      confetti({ particleCount: 60, spread: 70, startVelocity: 45, origin: { y: 0.6 } });
+      confetti({
+        particleCount: 60,
+        spread: 70,
+        startVelocity: 45,
+        origin: { y: 0.6 },
+      });
       if (++t >= pulses) clearInterval(int);
     }, 220);
   }
-    $: if (finished) {
-
+  $: if (finished) {
     setTimeout(celebrate, 150);
   }
 
@@ -43,7 +45,7 @@
   };
 
   const currentQuestions = shuffleArray(questions);
-  $: randomAnswers = shuffleArray([...currentQuestions[currentIndex].answers])
+  $: randomAnswers = shuffleArray([...currentQuestions[currentIndex].answers]);
 
   let currentIndex = 0;
   let selected = [];
@@ -51,7 +53,6 @@
   let score = 0;
   let finished = false;
   let answered = false;
-
 
   let history = [];
 
@@ -77,7 +78,8 @@
     const chosen = selectedSet();
 
     const isExactMatch =
-      correctSet.size === chosen.size && [...correctSet].every((a) => chosen.has(a));
+      correctSet.size === chosen.size &&
+      [...correctSet].every((a) => chosen.has(a));
 
     if (isExactMatch) {
       score++;
@@ -89,7 +91,7 @@
 
     history[currentIndex] = {
       selected: [...selected],
-      correct: [...current.correct]
+      correct: [...current.correct],
     };
   }
 
@@ -106,9 +108,12 @@
       if (prev) {
         prev = JSON.parse(prev);
         prev[`${slug}-${page}`] = score;
-        localStorage.setItem("prev-score", JSON.stringify(prev))
+        localStorage.setItem("prev-score", JSON.stringify(prev));
       } else {
-        localStorage.setItem("prev-score", JSON.stringify({[`${slug}-${page}`]: score}))
+        localStorage.setItem(
+          "prev-score",
+          JSON.stringify({ [`${slug}-${page}`]: score }),
+        );
       }
     }
   }
@@ -116,7 +121,7 @@
   function saveQuestion() {
     let saved = localStorage.getItem("saved-questions");
     if (saved) {
-      saved
+      saved;
     }
   }
 
@@ -131,7 +136,7 @@
     answered = false;
     history = [];
   }
-2
+  2;
   function onKey(e) {
     if (finished) return;
     const idx = parseInt(e.key, 10);
@@ -144,17 +149,30 @@
     }
   }
 
-  $: progressPct = Math.round(((currentIndex + (answered ? 1 : 0)) / total) * 100);
+  $: progressPct = Math.round(
+    ((currentIndex + (answered ? 1 : 0)) / total) * 100,
+  );
 </script>
 
-<div class="quiz-root" on:keydown={onKey} tabindex="0" aria-label="Quiz container">
+<div
+  class="quiz-root"
+  on:keydown={onKey}
+  tabindex="0"
+  aria-label="Quiz container"
+>
   {#if !finished}
     <header class="quiz-header">
       <div class="badge">Question {currentIndex + 1} / {total}</div>
       <div class="score">Score: <strong>{score}</strong></div>
     </header>
 
-    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={progressPct}>
+    <div
+      class="progress"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow={progressPct}
+    >
       <div class="bar" style={`width:${progressPct}%`}></div>
     </div>
 
@@ -180,8 +198,15 @@
                 class="
                   answer
                   {selected.includes(answer) && !answered ? 'is-selected' : ''}
-                  {answered && isCorrectAnswer(answer, currentQuestions[currentIndex]) ? 'is-correct' : ''}
-                  {answered && selected.includes(answer) && !isCorrectAnswer(answer, currentQuestions[currentIndex]) ? 'is-wrong' : ''}
+                  {answered &&
+                isCorrectAnswer(answer, currentQuestions[currentIndex])
+                  ? 'is-correct'
+                  : ''}
+                  {answered &&
+                selected.includes(answer) &&
+                !isCorrectAnswer(answer, currentQuestions[currentIndex])
+                  ? 'is-wrong'
+                  : ''}
                 "
                 on:click={() => toggleAnswer(answer)}
                 disabled={answered}
@@ -223,10 +248,11 @@
   {:else}
     <article class="result">
       <h2>🎉 Quiz complete</h2>
-      <p class="final">You scored <strong>{score}</strong> out of <strong>{total}</strong>.</p>
+      <p class="final">
+        You scored <strong>{score}</strong> out of <strong>{total}</strong>.
+      </p>
       <button class="btn primary" on:click={restart}>Restart</button>
     </article>
-
 
     <section class="review-list" aria-label="Review answers">
       {#each currentQuestions as q, qi}
@@ -234,11 +260,15 @@
           <h3 class="review-q">Q{qi + 1}. {q.question}</h3>
 
           {#if history[qi]?.selected}
-            {#if history[qi].selected.some(a => !isCorrectAnswer(a, q))}
+            {#if history[qi].selected.some((a) => !isCorrectAnswer(a, q))}
               <p class="your-picks-line">
-                Your wrong pick{history[qi].selected.filter(a => !isCorrectAnswer(a, q)).length > 1 ? 's' : ''}:
+                Your wrong pick{history[qi].selected.filter(
+                  (a) => !isCorrectAnswer(a, q),
+                ).length > 1
+                  ? "s"
+                  : ""}:
                 <span class="chips">
-                  {#each history[qi].selected.filter(a => !isCorrectAnswer(a, q)) as wp}
+                  {#each history[qi].selected.filter((a) => !isCorrectAnswer(a, q)) as wp}
                     <span class="chip chip-wrong">{wp}</span>
                   {/each}
                 </span>
@@ -253,8 +283,15 @@
                   <div
                     class="answer readonly
                       {isCorrectAnswer(a, q) ? 'is-correct' : ''}
-                      {history[qi]?.selected?.includes(a) && !isCorrectAnswer(a, q) ? 'is-picked-wrong' : ''}"
-                    aria-label={isCorrectAnswer(a, q) ? 'Correct answer' : (history[qi]?.selected?.includes(a) ? 'Your pick' : 'Answer')}
+                      {history[qi]?.selected?.includes(a) &&
+                    !isCorrectAnswer(a, q)
+                      ? 'is-picked-wrong'
+                      : ''}"
+                    aria-label={isCorrectAnswer(a, q)
+                      ? "Correct answer"
+                      : history[qi]?.selected?.includes(a)
+                        ? "Your pick"
+                        : "Answer"}
                   >
                     <span class="index">{ai + 1}</span>
                     <span class="label">{a}</span>
@@ -264,8 +301,6 @@
                     {:else if history[qi]?.selected?.includes(a)}
                       <span class="mark" aria-hidden="true">✖</span>
                     {/if}
-
-                  
                   </div>
                 </li>
               {/key}
@@ -281,32 +316,49 @@
   :root {
     --bg: #0b1020;
     --bg-soft: #0f1530;
-    --card: rgba(255,255,255,0.06);
-    --card-border: rgba(255,255,255,0.12);
+    --card: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.12);
     --text: #e6e9f2;
     --muted: #9aa3b2;
     --primary: #7c9cff;
     --primary-strong: #547bff;
     --success: #31d0aa;
     --danger: #ff6b6b;
-    --ring: rgba(124,156,255,0.45);
-    --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    --ring: rgba(124, 156, 255, 0.45);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     --radius: 18px;
-    --transition: 180ms cubic-bezier(.2,.8,.2,1);
+    --transition: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   @media (prefers-color-scheme: light) {
-    :root{
-      --bg:#f6f7fb; --bg-soft:#fff; --card:#fff; --card-border:#e9edf4; --text:#1b2430;
-      --muted:#5b6574; --primary:#3658ff; --primary-strong:#2746e8; --success:#1fb397; --danger:#e74b4b;
-      --ring: rgba(54,88,255,.28);
-      --shadow: 0 10px 22px rgba(0,0,0,.08);
+    :root {
+      --bg: #f6f7fb;
+      --bg-soft: #fff;
+      --card: #fff;
+      --card-border: #e9edf4;
+      --text: #1b2430;
+      --muted: #5b6574;
+      --primary: #3658ff;
+      --primary-strong: #2746e8;
+      --success: #1fb397;
+      --danger: #e74b4b;
+      --ring: rgba(54, 88, 255, 0.28);
+      --shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
     }
   }
 
-  * { box-sizing: border-box; }
+  * {
+    box-sizing: border-box;
+  }
   .quiz-root {
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      Segoe UI,
+      Roboto,
+      "Helvetica Neue",
+      Arial;
     color: var(--text);
     padding: 2rem 1rem 3rem;
     display: grid;
@@ -320,25 +372,31 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: .75rem;
+    gap: 0.75rem;
   }
 
   .badge {
-    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.02)
+    );
     border: 1px solid var(--card-border);
     border-radius: 999px;
-    padding: .4rem .85rem;
+    padding: 0.4rem 0.85rem;
     font-weight: 600;
-    letter-spacing: .2px;
+    letter-spacing: 0.2px;
     box-shadow: var(--shadow);
   }
 
-  .score { color: var(--muted); }
+  .score {
+    color: var(--muted);
+  }
 
   .progress {
     width: min(880px, 100%);
     height: 10px;
-    background: rgba(255,255,255,.08);
+    background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--card-border);
     border-radius: 999px;
     overflow: hidden;
@@ -363,12 +421,12 @@
   .question {
     font-size: clamp(1.1rem, 1.4vw + 1rem, 1.6rem);
     line-height: 1.25;
-    margin: .2rem 0 1rem;
-    letter-spacing: .2px;
+    margin: 0.2rem 0 1rem;
+    letter-spacing: 0.2px;
   }
 
   .media {
-    margin: .6rem 0 1.2rem;
+    margin: 0.6rem 0 1.2rem;
     border-radius: calc(var(--radius) - 6px);
     overflow: hidden;
     border: 1px solid var(--card-border);
@@ -381,12 +439,16 @@
 
   .answers {
     display: grid;
-    grid-template-columns: repeat(1, minmax(0,1fr));
-    gap: .65rem;
-    margin: 0; padding: 0; list-style: none;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
   @media (min-width: 640px) {
-    .answers { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .answers {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .answer {
@@ -394,122 +456,182 @@
     text-align: left;
     display: grid;
     grid-template-columns: auto 1fr auto;
-    gap: .85rem;
+    gap: 0.85rem;
     align-items: center;
     background: var(--bg-soft);
     color: var(--text);
     border: 1px solid var(--card-border);
     border-radius: 14px;
-    padding: .9rem 1rem;
+    padding: 0.9rem 1rem;
     cursor: pointer;
-    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition), opacity var(--transition);
-    box-shadow: 0 3px 14px rgba(0,0,0,.08);
+    transition:
+      transform var(--transition),
+      border-color var(--transition),
+      box-shadow var(--transition),
+      background var(--transition),
+      opacity var(--transition);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
   }
   .answer:hover:not(:disabled) {
     transform: translateY(-1px);
     border-color: var(--ring);
-    box-shadow: 0 8px 24px rgba(0,0,0,.16), 0 0 0 6px var(--ring);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.16),
+      0 0 0 6px var(--ring);
   }
-  .answer:disabled { cursor: default; opacity: .88; }
+  .answer:disabled {
+    cursor: default;
+    opacity: 0.88;
+  }
 
   .answer .index {
-    width: 28px; height: 28px;
-    display: grid; place-items: center;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
     border-radius: 999px;
     font-weight: 700;
-    font-size: .9rem;
-    background: rgba(124,156,255,.15);
-    border: 1px solid rgba(124,156,255,.35);
+    font-size: 0.9rem;
+    background: rgba(124, 156, 255, 0.15);
+    border: 1px solid rgba(124, 156, 255, 0.35);
   }
-  .answer .label { line-height: 1.35; }
-  .answer .mark { font-weight: 900; opacity: .95; }
+  .answer .label {
+    line-height: 1.35;
+  }
+  .answer .mark {
+    font-weight: 900;
+    opacity: 0.95;
+  }
 
   .answer.is-selected {
-    background: linear-gradient(180deg, rgba(124,156,255,.12), rgba(124,156,255,.06));
+    background: linear-gradient(
+      180deg,
+      rgba(124, 156, 255, 0.12),
+      rgba(124, 156, 255, 0.06)
+    );
     border-color: var(--primary);
-    box-shadow: 0 6px 18px rgba(124,156,255,.25);
+    box-shadow: 0 6px 18px rgba(124, 156, 255, 0.25);
   }
   .answer.is-correct {
-    background: linear-gradient(180deg, rgba(49,208,170,.16), rgba(49,208,170,.06));
-    border-color: rgba(49,208,170,.6);
+    background: linear-gradient(
+      180deg,
+      rgba(49, 208, 170, 0.16),
+      rgba(49, 208, 170, 0.06)
+    );
+    border-color: rgba(49, 208, 170, 0.6);
   }
   .answer.is-wrong {
-    background: linear-gradient(180deg, rgba(255,107,107,.16), rgba(255,107,107,.06));
-    border-color: rgba(255,107,107,.6);
-    animation: shake .22s ease-in-out 0s 1;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 107, 107, 0.16),
+      rgba(255, 107, 107, 0.06)
+    );
+    border-color: rgba(255, 107, 107, 0.6);
+    animation: shake 0.22s ease-in-out 0s 1;
   }
 
   /* Review: user's wrong picks */
   .answer.is-picked-wrong {
-    border-color: rgba(231, 75, 75, .85);
-    background: linear-gradient(180deg, rgba(231,75,75,.18), rgba(231,75,75,.06));
+    border-color: rgba(231, 75, 75, 0.85);
+    background: linear-gradient(
+      180deg,
+      rgba(231, 75, 75, 0.18),
+      rgba(231, 75, 75, 0.06)
+    );
     position: relative;
   }
   .tag {
-    margin-left: .5rem;
-    padding: .1rem .45rem;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.45rem;
     border-radius: 999px;
-    font-size: .75rem;
+    font-size: 0.75rem;
     font-weight: 700;
     border: 1px solid var(--card-border);
-    background: rgba(255,255,255,.08);
+    background: rgba(255, 255, 255, 0.08);
   }
   .tag-wrong {
-    border-color: rgba(231, 75, 75, .65);
-    background: rgba(231, 75, 75, .18);
+    border-color: rgba(231, 75, 75, 0.65);
+    background: rgba(231, 75, 75, 0.18);
     color: #ffecec;
   }
 
-  .chips { display: inline-flex; gap: .35rem; flex-wrap: wrap; }
+  .chips {
+    display: inline-flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
   .chip {
-    display: inline-flex; align-items: center; gap: .35rem;
-    padding: .15rem .5rem; border-radius: 999px;
-    font-size: .78rem; font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
     border: 1px solid var(--card-border);
-    background: rgba(255,255,255,.06);
+    background: rgba(255, 255, 255, 0.06);
   }
   .chip-wrong {
-    border-color: rgba(231, 75, 75, .65);
-    background: rgba(231, 75, 75, .18);
+    border-color: rgba(231, 75, 75, 0.65);
+    background: rgba(231, 75, 75, 0.18);
     color: #ffecec;
   }
   .your-picks-line {
-    margin: 0 0 .5rem;
+    margin: 0 0 0.5rem;
     color: var(--muted);
-    font-size: .95rem;
+    font-size: 0.95rem;
   }
 
   .actions {
     margin-top: 1.1rem;
-    display: flex; align-items: center; gap: .9rem; flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
   }
-  .feedback { margin: 0 .25rem 0 0; font-weight: 600; color: var(--muted); }
+  .feedback {
+    margin: 0 0.25rem 0 0;
+    font-weight: 600;
+    color: var(--muted);
+  }
 
   .btn {
     border: 1px solid var(--card-border);
     border-radius: 12px;
-    padding: .7rem 1rem;
+    padding: 0.7rem 1rem;
     font-weight: 700;
-    letter-spacing: .2px;
+    letter-spacing: 0.2px;
     background: var(--bg-soft);
     color: var(--text);
     cursor: pointer;
-    transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition), opacity var(--transition);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition),
+      background var(--transition),
+      border-color var(--transition),
+      opacity var(--transition);
   }
   .btn:hover:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(0,0,0,.2), 0 0 0 6px var(--ring);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.2),
+      0 0 0 6px var(--ring);
     border-color: var(--ring);
   }
-  .btn:disabled { opacity: .6; cursor: default; }
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
 
   .btn.primary {
     background: linear-gradient(90deg, var(--primary), var(--primary-strong));
-    color: white; border-color: transparent;
+    color: white;
+    border-color: transparent;
   }
   .btn.success {
     background: linear-gradient(90deg, var(--success), #25c7b0);
-    color: #06211b; border-color: transparent;
+    color: #06211b;
+    border-color: transparent;
   }
 
   .result {
@@ -521,14 +643,29 @@
     padding: 2rem 1.4rem;
     box-shadow: var(--shadow);
   }
-  .final { color: var(--muted); margin: .4rem 0 1rem; }
+  .final {
+    color: var(--muted);
+    margin: 0.4rem 0 1rem;
+  }
 
   .review-list {
     width: min(880px, 100%);
-    display: grid; gap: 1rem;
+    display: grid;
+    gap: 1rem;
   }
-  .review-card .review-q { margin: 0 0 .6rem; font-size: 1.05rem; }
-  .answers.review { grid-template-columns: 1fr; }
-  .answer.readonly { cursor: default; }
-  .answer.readonly:hover { transform: none; box-shadow: 0 3px 14px rgba(0,0,0,.08); border-color: var(--card-border); }
+  .review-card .review-q {
+    margin: 0 0 0.6rem;
+    font-size: 1.05rem;
+  }
+  .answers.review {
+    grid-template-columns: 1fr;
+  }
+  .answer.readonly {
+    cursor: default;
+  }
+  .answer.readonly:hover {
+    transform: none;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+    border-color: var(--card-border);
+  }
 </style>
