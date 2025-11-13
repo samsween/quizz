@@ -607,12 +607,12 @@ export const questions = [
         "desc": "dual-stack"
       },
       {
-        "id": "0",
+        "id": "1",
         "term": "The IPv6 packet is transported inside an IPv4 packet.",
         "desc": "tunneling"
       },
       {
-        "id": "0",
+        "id": "2",
         "term": "IPv6 packets are converted into IPv4 packets, and vice versa.",
         "desc": "translation"
       }
