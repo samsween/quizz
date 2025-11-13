@@ -731,7 +731,7 @@ export const questions = [
       {
         "id": "1",
         "term": "a TEST-NET address",
-        "desc": ""
+        "desc": "192.0.2.123"
       },
       {
         "id": "2",
