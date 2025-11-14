@@ -46,7 +46,7 @@
   </header>
 
   {#if filtered.length === 0}
-    <p class="empty">No quizzes match “{query}”. Try a different search.</p>
+    <p class="empty">No quizzes match “{query}”. Try a different search</p>
   {:else}
     <section class="grid" aria-live="polite">
       {#each filtered as q}
