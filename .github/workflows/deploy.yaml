@@ -2,7 +2,7 @@ name: Deploy to GitHub Pagess
 
 on:
   push:
-    branches: [ main ]   # or your default branch
+    branches: [ payment ]   # or your default branch main
   workflow_dispatch:
 
 permissions:
