@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d appdb"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build:
+      context: .
+      target: dev
+    env_file: .env
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: ${DATABASE_URL}
+      CHOKIDAR_USEPOLLING: "true"
+      VITE_PORT: "5173" 
+    ports:
+      - "5173:5173"   # Vite hot reload
+      - "3000:3000"   # SvelteKit SSR port
+    volumes:
+      - .:/app
+      - /app/node_modules   # keep container node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: ["sh", "docker/entrypoint.dev.sh"]
+
+volumes:
+  dbdata:

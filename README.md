@@ -32,6 +32,9 @@ To create a production version of your app:
 ```sh
 npm run build
 ```
+npx prisma generate
+npx prisma db push
+
 
 You can preview the production build with `npm run preview`.
 
