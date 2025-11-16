@@ -1,10 +1,12 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-vercel';
 import { sveltekit } from '@sveltejs/kit/vite';
 const dev = process.argv.includes('dev');
 
 export default {
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      runtime: "nodejs22.x"
+    }),
        alias: {
       $lib: './src/lib'
     }
