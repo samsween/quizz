@@ -7,13 +7,12 @@
         <h1 class="title">🔒 {reason}</h1>
 
         <p class="subtitle">
-            This is a <strong> paywall</strong>.  
-            You must give AC Sweeney $20 to gain access to this site.
+           Please go to the neew domain at <a href="https://quiz.samsweeney.mee">quiz.samsweeney.me</a>
 
         </p>
 
         <div class="mock-box">
-            <p class="mock-line"> Payment Status: <strong>Pending</strong></p>
+            <p class="mock-line"> New Domain <strong><a href="https://quiz.samsweeney.me">quiz.samsweeney.me</a></strong></p>
          
         </div>
 
