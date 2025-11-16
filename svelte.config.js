@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-vercel';
-import { sveltekit } from '@sveltejs/kit/vite';
+// import { sveltekit } from '@sveltejs/kit/vite';
 
 export default {
   kit: {
@@ -10,5 +10,5 @@ export default {
       $lib: './src/lib'
     }
   },
-    plugins: [sveltekit()]
+    // plugins: [sveltekit()]
 };
