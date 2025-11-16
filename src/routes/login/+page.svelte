@@ -28,7 +28,7 @@
 
         <form method="POST" class="login-form">
           <div class="field">
-            <label for="username">Username</label>
+            <label for="username">Username.</label>
             <input
               id="username"
               name="username"
