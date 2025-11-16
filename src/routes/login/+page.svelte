@@ -28,15 +28,15 @@
 
         <form method="POST" class="login-form">
           <div class="field">
-            <label for="email">Email</label>
+            <label for="username">Username</label>
             <input
-              id="email"
-              name="email"
-              type="email"
+              id="username"
+              name="username"
+              type="username"
               class="input"
-              autocomplete="email"
-              placeholder="you@example.com"
-              value={form.email ?? ''}
+              autocomplete="username"
+              placeholder="sweenmachine"
+              value={form.username ?? ''}
               required
             />
           </div>

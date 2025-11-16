@@ -3,7 +3,7 @@ import { prisma } from '$lib/server/prisma';
 import { fail, redirect, type Cookies } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 
-export const load = async ({ locals }) => {
+export const load = async ({ locals }: {locals: any}) => {
   // Already logged in? send to home
   if (locals.user) throw redirect(303, '/');
   return {};
@@ -12,21 +12,21 @@ export const load = async ({ locals }) => {
 export const actions = {
   default: async ({ request, cookies }: {request: any, cookies: Cookies}) => {
     const form = await request.formData();
-    const email = String(form.get('email') ?? '').trim();
+    const username = String(form.get('username') ?? '').trim();
     const password = String(form.get('password') ?? '');
 
-    if (!email || !password) {
-      return fail(400, { error: 'Email and password required', email });
+    if (!username || !password) {
+      return fail(400, { error: 'username and password required', username });
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({ where: { username } });
     if (!user) {
-      return fail(400, { error: 'Invalid email or password', email });
+      return fail(400, { error: 'Invalid username or password', username });
     }
 
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) {
-      return fail(400, { error: 'Invalid email or password', email });
+      return fail(400, { error: 'Invalid username or password', username });
     }
 
     const now = new Date();

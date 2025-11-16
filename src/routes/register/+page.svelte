@@ -22,16 +22,16 @@
 
         <form method="POST" class="login-form">
           <div class="field">
-            <label for="email">Email</label>
+            <label for="username">Username</label>
             <input
-              id="email"
-              name="email"
-              type="email"
+              id="username"
+              name="username"
+              type="username"
               class="input"
-              placeholder="you@example.com"
-              autocomplete="email"
+              placeholder="sweenamchine"
+              autocomplete="username"
               required
-              value={form.email ?? ''}
+              value={form.username ?? ''}
             />
           </div>
 

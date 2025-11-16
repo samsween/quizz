@@ -1,6 +1,6 @@
+<!-- src/routes/quizz/quiz/[slug]/+page.svelte (or similar) -->
 <script lang="ts">
   import { onMount } from "svelte";
-  import { goto } from "$app/navigation";
   import { base } from "$app/paths";
 
   export let data: {
@@ -42,32 +42,42 @@
     const key = `${quiz.slug}-${i + 1}`;
     const { count } = rangeFor(i);
     const got = prevScores?.[key] ?? 0;
+  // @ts-ignore
     return acc + (got >= count ? 1 : 0);
   }, 0);
 
   $: totalAnswered = Array.from({ length: chunkCount }).reduce((acc, _, i) => {
     const key = `${quiz.slug}-${i + 1}`;
+  // @ts-ignore
+
     return acc + Math.min(prevScores?.[key] ?? 0, rangeFor(i).count);
   }, 0);
-
+  // @ts-ignore
   $: overallPct = Math.round((totalAnswered / totalQs) * 100);
 </script>
 
-<div class="lp-root">
-  <header class="lp-header">
+<div class="quiz-page">
+  <header class="quiz-header">
     <nav class="toolbar">
-      <a class="btn ghost" href={`${base}/`} aria-label="Go to home">Home</a>
+      <a
+        class="btn ghost"
+        href={`/${base}`}
+        aria-label="Back to all quizzes"
+      >
+        ← All quizzes
+      </a>
       <div class="spacer" />
-
     </nav>
 
     <h1 class="title">{quiz.title}</h1>
     <p class="sub">
-      {chunkCount} sections • {totalQs} questions
+      {chunkCount} sections • {totalQs} questions • {completedSections}/{chunkCount} sections completed
     </p>
 
     <div class="progress">
-      <div class="track" aria-hidden="true"><div class="bar" style={`width:${overallPct}%`} /></div>
+      <div class="track" aria-hidden="true">
+        <div class="bar" style={`width:${overallPct}%`} />
+      </div>
       <div class="progress-row">
         <span class="muted">Overall progress</span>
         <span class="pct" aria-live="polite">{overallPct}%</span>
@@ -81,7 +91,7 @@
         <article class="qcard">
           <a
             class="card-link"
-            href={`/quizz/quiz/${quiz.slug}/${i + 1}`}
+            href={`${base}/quiz/${quiz.slug}/${i + 1}`}
             aria-label={`Open Section ${i + 1}`}
           >
             <div class="body">
@@ -118,7 +128,9 @@
                         class="mini-bar"
                         style={`width:${Math.min(
                           100,
-                          Math.round((prevScores[`${quiz.slug}-${i + 1}`] / rangeFor(i).count) * 100)
+                          Math.round(
+                            (prevScores[`${quiz.slug}-${i + 1}`] / rangeFor(i).count) * 100
+                          )
                         )}%`}
                       />
                     </div>
@@ -134,141 +146,243 @@
 </div>
 
 <style>
-  :root {
-    --bg: #0b1020;
-    --bg-soft: #0f1530;
-    --card: rgba(255,255,255,0.06);
-    --card-border: rgba(255,255,255,0.12);
-    --text: #e6e9f2;
-    --muted: #9aa3b2;
-    --primary: #7c9cff;
-    --primary-strong: #547bff;
-    --ring: rgba(124,156,255,0.45);
-    --shadow: 0 18px 40px rgba(0,0,0,.35);
-    --radius: 18px;
-    --transition: 180ms cubic-bezier(.2,.8,.2,1);
-  }
-
-  * { box-sizing: border-box; }
-  .lp-root {
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    color: var(--text);
-    background:
-      radial-gradient(1200px 800px at 10% -20%, #20305b 0%, transparent 60%),
-      radial-gradient(1000px 700px at 110% 10%, #20305b 0%, transparent 60%),
-      var(--bg);
-    min-height: 100vh;
-    padding: 2rem 1rem 3rem;
+  .quiz-page {
+    width: min(1100px, 100%);
+    margin: 0 auto 2.5rem;
+    padding: 0 0 2.5rem;
     display: grid;
     gap: 1.5rem;
-    place-items: start center;
   }
 
-  .lp-header {
-    width: min(1100px, 100%);
+  .quiz-header {
     display: grid;
     gap: 0.75rem;
     text-align: left;
   }
-  .title { margin: .25rem 0 0; letter-spacing:.2px; }
-  .sub { color: var(--muted); margin: 0 0 .25rem; }
+
+  .title {
+    margin: 0.25rem 0 0;
+    letter-spacing: 0.02em;
+    font-size: clamp(1.4rem, 1rem + 1.4vw, 2rem);
+    background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 12px rgba(124, 156, 255, 0.15));
+  }
+
+  .sub {
+    color: var(--muted);
+    margin: 0 0 0.25rem;
+    font-size: 0.9rem;
+  }
 
   .toolbar {
-    display: flex; align-items: center; gap: .5rem;
-    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.04)
+    );
     border: 1px solid var(--card-border);
     border-radius: calc(var(--radius) + 6px);
-    padding: .5rem;
+    padding: 0.5rem;
     box-shadow: var(--shadow);
     backdrop-filter: blur(6px) saturate(120%);
   }
-  .spacer { flex: 1; }
+
+  .spacer {
+    flex: 1;
+  }
 
   .btn {
     border-radius: 12px;
-    padding: .55rem .85rem;
-    background: linear-gradient(90deg, var(--primary), var(--primary-strong));
+    padding: 0.55rem 0.85rem;
+    background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
     color: white;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     border: 0;
     cursor: pointer;
-    transition: box-shadow var(--transition), transform var(--transition), opacity var(--transition);
+    font-size: 0.9rem;
+    transition:
+      box-shadow var(--transition),
+      transform var(--transition),
+      opacity var(--transition);
   }
-  .btn:hover { box-shadow: 0 0 0 6px var(--ring); transform: translateY(-1px); }
+
+  .btn:hover {
+    box-shadow: 0 0 0 6px var(--ring);
+    transform: translateY(-1px);
+  }
+
   .btn.ghost {
     background: transparent;
     color: var(--text);
     border: 1px solid var(--card-border);
   }
-  .btn.ghost:hover { box-shadow: 0 0 0 6px var(--ring); }
+
+  .btn.ghost:hover {
+    box-shadow: 0 0 0 6px var(--ring);
+  }
 
   .progress {
-    display: grid; gap: .35rem; width: min(1100px, 100%);
+    display: grid;
+    gap: 0.35rem;
   }
+
   .track {
-    height: 10px; border-radius: 999px; overflow: hidden;
-    background: rgba(255,255,255,.08); border: 1px solid var(--card-border);
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--card-border);
   }
-  .bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--primary), var(--primary-strong)); }
-  .progress-row { display:flex; justify-content:space-between; align-items:center; }
-  .muted { color: var(--muted); }
-  .pct { font-variant-numeric: tabular-nums; }
+
+  .bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+    transition: width 220ms var(--transition);
+  }
+
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .muted {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .pct {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.9rem;
+  }
 
   .grid {
-    width: min(1100px, 100%);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
   }
 
   .qcard {
-    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.04)
+    );
     border: 1px solid var(--card-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
-    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition),
+      border-color var(--transition);
   }
+
   .qcard:hover {
     transform: translateY(-3px);
     border-color: var(--ring);
-    box-shadow: 0 20px 46px rgba(0,0,0,.45), 0 0 0 6px var(--ring);
+    box-shadow:
+      0 20px 46px rgba(0, 0, 0, 0.45),
+      0 0 0 6px var(--ring);
   }
 
   .card-link {
-    display: flex; flex-direction: column; color: inherit; text-decoration: none; height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
     outline: none;
   }
-  .card-link:focus-visible { box-shadow: 0 0 0 6px var(--ring); border-radius: inherit; }
 
-  .body { padding: 1rem; display: grid; gap: .5rem; }
-  .row { display:flex; align-items:center; justify-content:space-between; gap:.5rem; }
-  .section { margin: 0; font-size: 1.05rem; }
-  .desc { margin: 0; color: var(--muted); }
+  .card-link:focus-visible {
+    box-shadow: 0 0 0 6px var(--ring);
+    border-radius: inherit;
+  }
+
+  .body {
+    padding: 1rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .section {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+
+  .desc {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
 
   .footer {
-    margin-top: .35rem;
-    display: flex; gap: .75rem; align-items: center; justify-content: space-between;
+    margin-top: 0.35rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .chip {
-    font-size: .75rem; line-height: 1; padding: .45rem .6rem;
-    border-radius: 999px; border: 1px solid var(--card-border);
-    background: rgba(255,255,255,.05); color: var(--text);
+    font-size: 0.75rem;
+    line-height: 1;
+    padding: 0.45rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--card-border);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
   }
+
   .chip.success {
-    border-color: rgba(62, 255, 156, .45);
-    box-shadow: inset 0 0 0 999px rgba(62, 255, 156, .08);
+    border-color: rgba(62, 255, 156, 0.45);
+    box-shadow: inset 0 0 0 999px rgba(62, 255, 156, 0.08);
   }
 
-  .mini { width: 90px; }
-  .mini-track { height: 6px; border-radius: 999px; background: rgba(255,255,255,.10); overflow: hidden; border: 1px solid var(--card-border); }
-  .mini-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary-strong)); }
+  .mini {
+    width: 90px;
+  }
 
-  .score { color: #5CFF8A; font-weight: 700; }
+  .mini-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+  }
+
+  .mini-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+  }
+
+  .score {
+    color: #5cff8a;
+    font-weight: 700;
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .qcard, .btn, .bar, .mini-bar { transition: none; }
+    .qcard,
+    .btn,
+    .bar,
+    .mini-bar {
+      transition: none;
+    }
   }
 </style>

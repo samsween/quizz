@@ -11,15 +11,25 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("SUPERBASE_URL")
 }
 
+// Existing models
+enum Role {
+  USER
+  ADMIN
+}
+
+// Existing models
 model User {
-  id           String    @id @default(cuid())
-  email        String    @unique
+  id           String      @id @default(cuid())
+  username     String      @unique
   passwordHash String
-  confirmed    Boolean   @default(false)
+  confirmed    Boolean     @default(false)
+  role         Role        @default(USER)   // 👈 NEW
+
   sessions     Session[]
+  quizAttempts QuizAttempt[]
 }
 
 model Session {
@@ -30,22 +40,109 @@ model Session {
   expiresAt DateTime
 }
 
+model RegisterAttempt {
+  id        String   @id @default(cuid())
+  ip        String
+  createdAt DateTime @default(now())
 
-/** 
-{
-    "question": String,
-    "answers": String[],
-    "correct": String[],
-    "img": String | Null,
-    "type": String ("mcq")
-  },
-  {
-    "prompt": String,
-    "pairs": [{ "id": String, "term": String, "desc": String}],
-    "img": String | null,
-    "type": String ("match")
-  },
+  @@index([ip, createdAt])
+}
 
-*/
+// --- NEW ---
+
+/// MCQ / Match question types
+enum QuestionType {
+  MCQ
+  MATCH
+}
+
+/// Top-level quiz definition (what you currently hard-code)
+model Quiz {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  title       String
+  description String?
+  image       String?
+
+  // if you like, you can store this explicitly or just derive it
+  chunkCount  Int?        // "sections" count (optional)
+
+  questions   Question[]
+  attempts    QuizAttempt[]
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+/// Individual question for a quiz (MCQ or MATCH)
+model Question {
+  id        String       @id @default(cuid())
+  quiz      Quiz         @relation(fields: [quizId], references: [id])
+  quizId    String
+
+  // which "section/page" this belongs to (1-based index to match your URLs)
+  section   Int?
+
+  // order inside that section
+  order     Int          @default(0)
+
+  type      QuestionType
+
+  // MCQ fields
+  question  String?      // e.g. "When data is encoded as pulses of light..."
+  answers   String[]     // ["Wireless", "Fibre optic cable", ...]
+  correct   String[]     // ["Fibre optic cable"]
+
+  // MATCH fields
+  prompt    String?      // e.g. "Match each term to its correct description"
+  pairs     MatchPair[]  // only used when type = MATCH
+
+  img       String?
+
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+/// For MATCH questions: term/description pairs
+model MatchPair {
+  id         String    @id @default(cuid())
+  question   Question  @relation(fields: [questionId], references: [id])
+  questionId String
+
+  term       String
+  desc       String
+
+  // optional ordering within the question
+  order      Int       @default(0)
+}
+
+/// Saved scores per user, per quiz, per section (like `${slug}-${page}`)
+model QuizAttempt {
+  id             String   @id @default(cuid())
+
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
+
+  quiz           Quiz     @relation(fields: [quizId], references: [id])
+  quizId         String
+
+  // section index – matches your `page` param (1, 2, 3, ...)
+  section        Int?
+
+  // raw score (number of correct answers)
+  score          Int
+
+  // how many questions were in that section when they took it
+  totalQuestions Int
+
+  // you can decide whether you want to allow multiple attempts per section
+  // or enforce one row per user+quiz+section
+  createdAt      DateTime @default(now())
+
+  @@index([userId, quizId, section])
+  // If you want only one attempt per section, switch to:
+  // @@unique([userId, quizId, section])
+}
+
 
 

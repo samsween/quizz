@@ -1,10 +1,9 @@
 // src/hooks.server.ts
 import { prisma } from '$lib/server/prisma';
 import type { Handle } from '@sveltejs/kit';
-
 import { redirect } from '@sveltejs/kit';
 
-const PUBLIC_ROUTES = ['/login', '/register', '/health'];
+const PUBLIC_ROUTES = ['/login', '/register', '/health', '/unconfirmed', "/logout"];
 
 export const handle: Handle = async ({ event, resolve }) => {
   const sessionId = event.cookies.get('session');
@@ -19,9 +18,10 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
 
     if (session && session.expiresAt > new Date()) {
-      event.locals.user = session.user;
+      const { passwordHash, ...safeUser } = session.user as any;
+      event.locals.user = safeUser;
     } else if (session) {
-      // expired
+      // expired session
       await prisma.session.delete({ where: { id: sessionId } });
       event.cookies.delete('session', { path: '/' });
     }
@@ -32,8 +32,14 @@ export const handle: Handle = async ({ event, resolve }) => {
     path === p || path.startsWith(`${p}/`)
   );
 
+  // 🔐 1. Not logged in
   if (!event.locals.user && !isPublic) {
     throw redirect(303, '/login');
+  }
+
+  // 🔐 2. Logged in but NOT confirmed
+  if (event.locals.user && !event.locals.user.confirmed && !isPublic) {
+    throw redirect(303, '/unconfirmed');
   }
 
   return resolve(event);

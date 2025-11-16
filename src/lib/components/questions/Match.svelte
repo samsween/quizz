@@ -24,12 +24,12 @@
   const left = shuffle(pairs ?? []).map((p, i) => ({
     ...p,
     idx: i,
-    desc: p.desc ?? p.description ?? "",
+    desc: p.desc ?? p.description ?? ""
   }));
   const right = shuffle(pairs ?? []).map((p, i) => ({
     ...p,
     rIdx: i,
-    desc: p.desc ?? p.description ?? "",
+    desc: p.desc ?? p.description ?? ""
   }));
 
   function termById(id) {
@@ -57,25 +57,16 @@
   let userMatches = objFromConnections(connections);
   let selectedLeft = null;
 
-  const colors = [
-    "#7c9cff",
-    "#31d0aa",
-    "#ffb347",
-    "#ff6b6b",
-    "#b47cff",
-    "#7cdcff",
-  ];
+  const colors = ["#7c9cff", "#31d0aa", "#ffb347", "#ff6b6b", "#b47cff", "#7cdcff"];
   let matchColors = {};
 
   function hydrateColors() {
     const next = {};
-    let i = 0;
     const seen = new Set();
     for (const leftId of Object.values(userMatches)) {
       if (!seen.has(leftId)) {
         next[leftId] = colors[Object.keys(next).length % colors.length];
         seen.add(leftId);
-        i++;
       }
     }
     matchColors = next;
@@ -100,7 +91,7 @@
       },
       destroy() {
         delete leftRefs[id];
-      },
+      }
     };
   }
   function storeRight(node, id) {
@@ -113,7 +104,7 @@
       },
       destroy() {
         delete rightRefs[id];
-      },
+      }
     };
   }
 
@@ -148,7 +139,7 @@
     userMatches = { ...userMatches, [rightId]: selectedLeft };
     connections = Object.entries(userMatches).map(([r, l]) => ({
       rightId: r,
-      leftId: l,
+      leftId: l
     }));
 
     selectedLeft = null;
@@ -174,13 +165,14 @@
 
     connections = Object.entries(userMatches).map(([r, l]) => ({
       rightId: r,
-      leftId: l,
+      leftId: l
     }));
 
     await tick();
     computeLines();
     emitState();
   }
+
   function descFromId(id) {
     const p = pairs.find((p) => p.id === id);
     return p?.desc ?? p?.description ?? "";
@@ -213,12 +205,12 @@
   $: leftColor = (leftId) => {
     if (freeze) return null;
     const rId = rightForLeft(leftId);
-    return rId ? (matchColors[leftId] ?? null) : null;
+    return rId ? matchColors[leftId] ?? null : null;
   };
   $: rightColor = (rightId) => {
     if (freeze) return null;
     const leftId = userMatches[rightId];
-    return leftId ? (matchColors[leftId] ?? null) : null;
+    return leftId ? matchColors[leftId] ?? null : null;
   };
 
   function centerOf(el, base) {
@@ -227,7 +219,7 @@
     const b = base.getBoundingClientRect();
     return {
       x: r.left + r.width / 2 - b.left,
-      y: r.top + r.height / 2 - b.top,
+      y: r.top + r.height / 2 - b.top
     };
   }
 
@@ -249,9 +241,9 @@
         y2: b.y,
         color: freeze
           ? rightId === leftId
-            ? "var(--success)"
-            : "var(--danger)"
-          : matchColors[leftId] || "#7c9cff",
+            ? "#31d0aa"   // correct green
+            : "#ff6b6b"   // wrong red
+          : matchColors[leftId] || "#7c9cff"
       });
     }
     lines = conns;
@@ -291,7 +283,7 @@
   $: computeLines(), emitState();
 </script>
 
-<article class="card match-card">
+<article class="match-card">
   <header class="match-header">
     <div class="flex">
       <h2 class="question">{prompt}</h2>
@@ -409,7 +401,7 @@
                     <span
                       class="conn-pill user"
                       style={freeze && userMatches[r.id] !== r.id
-                        ? "border-color: var(--danger); background: rgba(255,107,107,0.12) !important;"
+                        ? "border-color:#ff6b6b; background:rgba(255,107,107,0.12) !important;"
                         : !freeze
                           ? `border-color:${rightColor(r.id) ?? "#7c9cff"} !important; background:${rightColor(r.id) ?? "#7c9cff"}22 !important; border:2px;`
                           : ""}
@@ -440,115 +432,28 @@
 </article>
 
 <style>
-  :global(:root) {
-    --bg: #0b1020;
-    --bg-soft: #0f1530;
-    --card: rgba(255, 255, 255, 0.06);
-    --card-border: rgba(255, 255, 255, 0.12);
-    --text: #e6e9f2;
-    --muted: #9aa3b2;
-    --primary: #7c9cff;
-    --primary-strong: #547bff;
-    --success: #31d0aa;
-    --danger: #ff6b6b;
-    --ring: rgba(124, 156, 255, 0.45);
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    --radius: 18px;
-    --transition: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  .match-card {
+    display: grid;
+    gap: 0.75rem;
   }
+
   .flex {
     display: flex;
     align-items: center;
-  }
-  .card.match-card {
-    width: min(880px, 100%);
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 1.2rem;
-    backdrop-filter: blur(10px);
-  }
-  .match-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
   }
 
-  .pill.is-correct {
-    background: linear-gradient(
-      180deg,
-      rgba(49, 208, 170, 0.25),
-      rgba(49, 208, 170, 0.12)
-    ) !important;
-    border-color: rgba(49, 208, 170, 0.9) !important;
-    color: #06211b !important;
-    box-shadow: 0 0 10px rgba(49, 208, 170, 0.3) !important;
-  }
-  .pill.is-wrong {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 107, 107, 0.25),
-      rgba(255, 107, 107, 0.12)
-    ) !important;
-    border-color: rgba(255, 107, 107, 0.9) !important;
-    color: #fff !important;
-    box-shadow: 0 0 10px rgba(255, 107, 107, 0.25) !important;
-  }
-  .pill.is-used {
-    pointer-events: none;
-
-    opacity: 0.6;
-  }
-
-  .pill.is-used:hover {
-    transform: none;
-    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
-    border-color: var(--card-border);
-  }
-
-  .pill.is-used[style*="background"] {
-    opacity: 1;
+  .match-header {
+    display: grid;
+    gap: 0.5rem;
   }
 
   .question {
     margin: 0.2rem 0;
     letter-spacing: 0.2px;
     font-size: clamp(1.1rem, 1.2vw + 1rem, 1.5rem);
-  }
-  .media {
-    margin: 0.6rem 0 1.2rem;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--card-border);
-  }
-  .media img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .target.is-correct {
-    background: linear-gradient(
-      180deg,
-      rgba(49, 208, 170, 0.25),
-      rgba(49, 208, 170, 0.12)
-    ) !important;
-    border-color: rgba(49, 208, 170, 0.9) !important;
-    color: #06211b !important;
-    box-shadow: 0 0 10px rgba(49, 208, 170, 0.3) !important;
-  }
-  .target.is-wrong {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 107, 107, 0.25),
-      rgba(255, 107, 107, 0.12)
-    ) !important;
-    border-color: rgba(255, 107, 107, 0.9) !important;
-    color: #fff !important;
-    box-shadow: 0 0 10px rgba(255, 107, 107, 0.25) !important;
   }
 
   .badge {
@@ -563,10 +468,25 @@
     font-weight: 600;
     color: var(--muted);
     box-shadow: var(--shadow);
+    font-size: 0.85rem;
   }
+
+  .media {
+    margin: 0.6rem 0 1.2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+  }
+  .media img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .match-wrap {
     position: relative;
   }
+
   .links {
     position: absolute;
     inset: 0;
@@ -583,6 +503,7 @@
     grid-template-columns: 1fr;
     margin-top: 0.4rem;
   }
+
   @media (min-width: 800px) {
     .match-grid {
       grid-template-columns: 1fr 1fr;
@@ -596,6 +517,7 @@
     font-weight: 700;
     letter-spacing: 0.2px;
   }
+
   .bank,
   .targets {
     list-style: none;
@@ -628,6 +550,7 @@
     box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
     cursor: pointer;
   }
+
   .pill:hover {
     transform: translateY(-1px);
     border-color: var(--ring);
@@ -635,13 +558,51 @@
       0 8px 24px rgba(0, 0, 0, 0.16),
       0 0 0 6px var(--ring);
   }
+
   .pill.is-selected {
     background: linear-gradient(
       180deg,
       rgba(124, 156, 255, 0.12),
       rgba(124, 156, 255, 0.06)
     );
-    border-color: var(--primary);
+    border-color: #7c9cff;
+  }
+
+  .pill.is-correct {
+    background: linear-gradient(
+      180deg,
+      rgba(49, 208, 170, 0.25),
+      rgba(49, 208, 170, 0.12)
+    ) !important;
+    border-color: rgba(49, 208, 170, 0.9) !important;
+    color: #06211b !important;
+    box-shadow: 0 0 10px rgba(49, 208, 170, 0.3) !important;
+  }
+
+  .pill.is-wrong {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 107, 107, 0.25),
+      rgba(255, 107, 107, 0.12)
+    ) !important;
+    border-color: rgba(255, 107, 107, 0.9) !important;
+    color: #fff !important;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.25) !important;
+  }
+
+  .pill.is-used {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .pill.is-used:hover {
+    transform: none;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+    border-color: var(--card-border);
+  }
+
+  .pill.is-used[style*="background"] {
+    opacity: 1;
   }
 
   .target {
@@ -663,6 +624,7 @@
     box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
     cursor: pointer;
   }
+
   .target:hover {
     transform: translateY(-1px);
     border-color: var(--ring);
@@ -670,6 +632,7 @@
       0 8px 24px rgba(0, 0, 0, 0.16),
       0 0 0 6px var(--ring);
   }
+
   .target.is-correct {
     background: linear-gradient(
       180deg,
@@ -678,6 +641,7 @@
     );
     border-color: rgba(49, 208, 170, 0.6);
   }
+
   .target.is-wrong {
     background: linear-gradient(
       180deg,
@@ -693,6 +657,7 @@
     gap: 0.6rem;
     align-items: center;
   }
+
   .index {
     width: 28px;
     height: 28px;
@@ -704,6 +669,7 @@
     background: rgba(124, 156, 255, 0.15);
     border: 1px solid rgba(124, 156, 255, 0.35);
   }
+
   .label {
     line-height: 1.35;
   }
@@ -715,6 +681,7 @@
     flex-wrap: wrap;
     justify-self: end;
   }
+
   .conn-pill {
     display: inline-flex;
     align-items: center;
@@ -726,16 +693,19 @@
     border: 1px solid var(--card-border);
     background: rgba(255, 255, 255, 0.06);
   }
-  .hint {
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
+
   .conn-pill.correct {
-    border-color: var(--success);
+    border-color: #31d0aa;
     background: rgba(49, 208, 170, 0.12);
     font-weight: 800;
   }
+
   .conn-pill.user {
     background: rgba(255, 255, 255, 0.06);
+  }
+
+  .hint {
+    color: var(--muted);
+    font-size: 0.9rem;
   }
 </style>
