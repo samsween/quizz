@@ -10,7 +10,8 @@ export const questions = [
     "correct": [
       " The client randomly selects a source port number."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which transport layer feature is used to guarantee session establishment?",
@@ -23,7 +24,8 @@ export const questions = [
     "correct": [
       " TCP 3-way handshake"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is the complete range of TCP and UDP well-known ports?",
@@ -36,7 +38,8 @@ export const questions = [
     "correct": [
       " 0 to 1023"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is a socket?",
@@ -49,7 +52,8 @@ export const questions = [
     "correct": [
       " the combination of a source IP address and port number or a destination IP address and port number"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC is downloading a large file from a server. The TCP window is 1000 bytes. The server is sending the file using 100-byte segments. How many segments will the server send before it requires an acknowledgment from the PC?",
@@ -62,7 +66,8 @@ export const questions = [
     "correct": [
       " 10 segment"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which factor determines TCP window size?",
@@ -75,7 +80,8 @@ export const questions = [
     "correct": [
       " the amount of data the destination can process at one time"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What does a client do when it has UDP datagrams to send?",
@@ -88,7 +94,8 @@ export const questions = [
     "correct": [
       " It just sends the datagrams."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which three fields are used in a UDP segment header? (Choose three.)",
@@ -105,7 +112,8 @@ export const questions = [
       " Source Port",
       " Checksum"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What are two roles of the transport layer in data communication on a network? (Choose two.)",
@@ -120,7 +128,8 @@ export const questions = [
       " identifying the proper application for each communication stream",
       " tracking the individual communication between applications on the source and destination hosts"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What information is used by TCP to reassemble and reorder received segments?",
@@ -133,7 +142,8 @@ export const questions = [
     "correct": [
       " sequence numbers"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What important information is added to the TCP/IP transport layer header to ensure communication and connectivity with a remote network device?",
@@ -146,7 +156,8 @@ export const questions = [
     "correct": [
       " destination and source port numbers"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which two characteristics are associated with UDP sessions? (Choose two.)",
@@ -161,24 +172,35 @@ export const questions = [
       " Destination devices receive traffic with minimal delay.",
       " Received data is unacknowledged."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
-    "question": "A client application needs to terminate a TCP communication session with a server. Place the termination process steps in the order that they will occur. (Not all options are used.)",
-    "answers": [
-      "client sends SYN",
-      "server sends SYN",
-      "step 1\n\t\nclient sends FIN",
-      "client sends FIN",
-      "step 2\n\t\nserver sends ACK",
-      "server sends ACK",
-      "step 3\n\t\nserver sends FIN",
-      "server sends FIN",
-      "step 4\n\t\nclient sends ACK",
-      "client sends ACK"
+    "prompt": "A client application needs to terminate a TCP communication session with a server. Place the termination process steps in the order that they will occur. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "1",
+        "term": "step 1",
+        "desc": "Client sends FIN"
+      },
+      {
+        "id": "2",
+        "term": "step 2",
+        "desc": "server sends ACK"
+      },
+      {
+        "id": "3",
+        "term": "step 3",
+        "desc": "Server sends FIN"
+      },
+      {
+        "id": "4",
+        "term": "step 4",
+        "desc": "Client send ACK"
+      }
     ],
-    "correct": [],
-    "img": null
+    "img": null,
+    "type": "match"
   },
   {
     "question": "Which flag in the TCP header is used in response to a received FIN in order to terminate connectivity between two network devices?",
@@ -191,7 +213,8 @@ export const questions = [
     "correct": [
       " ACK"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which protocol or service uses UDP for a client-to-server communication and TCP for server-to-server communication?",
@@ -204,7 +227,8 @@ export const questions = [
     "correct": [
       " DNS"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is a characteristic of UDP?",
@@ -217,7 +241,8 @@ export const questions = [
     "correct": [
       " UDP reassembles the received datagrams in the order they were received."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What kind of port must be requested from IANA in order to be used with a specific application?",
@@ -230,7 +255,8 @@ export const questions = [
     "correct": [
       " registered port"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which three application layer protocols use TCP? (Choose three.)",
@@ -247,7 +273,8 @@ export const questions = [
       " FTP",
       " HTTP"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which three statements characterize UDP? (Choose three.)",
@@ -264,7 +291,8 @@ export const questions = [
       " UDP relies on application layer protocols for error detection.",
       " UDP is a low overhead protocol that does not provide sequencing or flow control mechanisms."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which two fields are included in the TCP header but not in the UDP header? (Choose two.)",
@@ -279,7 +307,8 @@ export const questions = [
       " window",
       " sequence number"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which field in the TCP header indicates the status of the three-way handshake process?",
@@ -292,7 +321,8 @@ export const questions = [
     "correct": [
       " control bits"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Why does HTTP use TCP as the transport layer protocol?",
@@ -305,7 +335,8 @@ export const questions = [
     "correct": [
       " because HTTP requires reliable delivery"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which two types of applications are best suited for UDP? (Choose two.)",
@@ -320,7 +351,8 @@ export const questions = [
       " applications that handle reliability themselves",
       " applications that can tolerate some data loss, but require little or no delay"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "How are port numbers used in the TCP/IP encapsulation process?",
@@ -333,7 +365,8 @@ export const questions = [
     "correct": [
       " If multiple conversations occur that are using the same service, the source port number is used to track the separate conversations."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "In what two situations would UDP be better than TCP as the preferred transport protocol? (Choose two.)",
@@ -348,7 +381,8 @@ export const questions = [
       " when a faster delivery mechanism is needed",
       " when applications do not need to guarantee delivery of the data"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What are three responsibilities of the transport layer? (Choose three.)",
@@ -365,7 +399,8 @@ export const questions = [
       " multiplexing multiple communication streams from many users or applications on the same network",
       " identifying the applications and services on the client and server that should handle transmitted data"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which three statements describe a DHCP Discover message? (Choose three.)",
@@ -382,7 +417,8 @@ export const questions = [
       " The message comes from a client seeking an IP address.",
       " All hosts receive the message, but only a DHCP server replies."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which two protocols may devices use in the application process that sends email? (Choose two.)",
@@ -398,7 +434,8 @@ export const questions = [
       " SMTP",
       " DNS"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is true about the Server Message Block protocol?",
@@ -411,7 +448,8 @@ export const questions = [
     "correct": [
       " Clients establish a long term connection to servers."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is the function of the HTTP GET message?",
@@ -424,7 +462,8 @@ export const questions = [
     "correct": [
       " to request an HTML page from a web server"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which OSI layer provides the interface between the applications used to communicate and the underlying network over which messages are transmitted?",
@@ -437,7 +476,8 @@ export const questions = [
     "correct": [
       " application"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which networking model is being used when an author uploads one chapter document to a file server of a book publisher?",
@@ -450,7 +490,8 @@ export const questions = [
     "correct": [
       " client/server"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What do the client/server and peer-to-peer network models have in common?",
@@ -463,7 +504,8 @@ export const questions = [
     "correct": [
       " Both models support devices in server and client roles."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "In what networking model would eDonkey, eMule, BitTorrent, Bitcoin, and LionShare be used?",
@@ -476,7 +518,8 @@ export const questions = [
     "correct": [
       " peer-to-peer"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is a common protocol that is used with peer-to-peer applications such as WireShare, Bearshare, and Shareaza?",
@@ -489,7 +532,8 @@ export const questions = [
     "correct": [
       " Gnutella"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is a key characteristic of the peer-to-peer networking model?",
@@ -502,7 +546,8 @@ export const questions = [
     "correct": [
       " resource sharing without a dedicated server"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "The application layer of the TCP/IP model performs the functions of what three layers of the OSI model? (Choose three.)",
@@ -520,7 +565,8 @@ export const questions = [
       " presentation",
       " application"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is an example of network communication that uses the client-server model?",
@@ -533,7 +579,8 @@ export const questions = [
     "correct": [
       " A workstation initiates a DNS request when the user types www.cisco.com in the address bar of a web browser."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which layer in the TCP/IP model is used for formatting, compressing, and encrypting data?",
@@ -547,7 +594,8 @@ export const questions = [
     "correct": [
       " application"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is an advantage of SMB over FTP?​",
@@ -560,7 +608,8 @@ export const questions = [
     "correct": [
       " SMB clients can establish a long-term connection to the server.​"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A manufacturing company subscribes to certain hosted services from its ISP. The services that are required include hosted world wide web, file transfer, and e-mail. Which protocols represent these three key applications? (Choose three.)",
@@ -577,7 +626,8 @@ export const questions = [
       " HTTP",
       " SMTP"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which application layer protocol uses message types such as GET, PUT, and POST?",
@@ -591,7 +641,8 @@ export const questions = [
     "correct": [
       " HTTP"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What type of information is contained in a DNS MX record?",
@@ -604,7 +655,8 @@ export const questions = [
     "correct": [
       " the domain name mapped to mail exchange servers"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which three protocols operate at the application layer of the TCP/IP model? (Choose three.)",
@@ -621,7 +673,8 @@ export const questions = [
       " POP3",
       " DHCP"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which protocol is used by a client to communicate securely with a web server?",
@@ -634,7 +687,8 @@ export const questions = [
     "correct": [
       " HTTPS"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which applications or services allow hosts to act as client and server at the same time?",
@@ -647,7 +701,8 @@ export const questions = [
     "correct": [
       " P2P applications"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What are two characteristics of peer-to-peer networks? (Choose two.)",
@@ -662,7 +717,8 @@ export const questions = [
       " decentralized resources",
       " resource sharing without a dedicated server"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which scenario describes a function provided by the transport layer?",
@@ -675,7 +731,8 @@ export const questions = [
     "correct": [
       " A student has two web browser windows open in order to access two web sites. The transport layer ensures the correct web page is delivered to the correct browser window."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which three layers of the OSI model provide similar network services to those provided by the application layer of the TCP/IP model? (Choose three.)",
@@ -692,7 +749,8 @@ export const questions = [
       " application layer",
       " presentation layer"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received two packets of data from the PC?",
@@ -705,7 +763,8 @@ export const questions = [
     "correct": [
       " 3001"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received three packets of data from the PC?",
@@ -718,7 +777,8 @@ export const questions = [
     "correct": [
       " 4501"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received four packets of data from the PC?",
@@ -731,7 +791,8 @@ export const questions = [
     "correct": [
       " 6001"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received four packets of data from the PC?",
@@ -744,7 +805,8 @@ export const questions = [
     "correct": [
       " 6001"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received two packets of data from the PC?",
@@ -757,7 +819,8 @@ export const questions = [
     "correct": [
       " 3001"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received two packets of data from the PC?",
@@ -770,7 +833,8 @@ export const questions = [
     "correct": [
       " 3001"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received two packets of data from the PC?",
@@ -783,7 +847,8 @@ export const questions = [
     "correct": [
       " 3001"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received two packets of data from the PC?",
@@ -796,7 +861,8 @@ export const questions = [
     "correct": [
       " 3001"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received three packets of data from the PC?",
@@ -809,7 +875,8 @@ export const questions = [
     "correct": [
       " 4501"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A PC that is communicating with a web server has a TCP window size of 6,000 bytes when sending data and a packet size of 1,500 bytes. Which byte of information will the web server acknowledge after it has received three packets of data from the PC?",
@@ -822,7 +889,8 @@ export const questions = [
     "correct": [
       " 4501"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting TFTP service. What number will be used as the destination port number in the sending packet?",
@@ -835,7 +903,8 @@ export const questions = [
     "correct": [
       " 69"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting FTP service. What number will be used as the destination port number in the sending packet?",
@@ -848,7 +917,8 @@ export const questions = [
     "correct": [
       " 21"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting SSH service. What number will be used as the destination port number in the sending packet?",
@@ -861,7 +931,8 @@ export const questions = [
     "correct": [
       " 22"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting HTTP service. What number will be used as the destination port number in the sending packet?",
@@ -874,7 +945,8 @@ export const questions = [
     "correct": [
       " 80"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting POP3 service. What number will be used as the destination port number in the sending packet?",
@@ -887,7 +959,8 @@ export const questions = [
     "correct": [
       " 110"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting telnet service. What number will be used as the destination port number in the sending packet?",
@@ -900,7 +973,8 @@ export const questions = [
     "correct": [
       " 23"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting POP3 service. What number will be used as the destination port number in the sending packet?",
@@ -913,7 +987,8 @@ export const questions = [
     "correct": [
       " 110"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting SNMP service. What number will be used as the destination port number in the sending packet?",
@@ -926,7 +1001,8 @@ export const questions = [
     "correct": [
       " 161"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting SMTP service. What number will be used as the destination port number in the sending packet?",
@@ -939,7 +1015,8 @@ export const questions = [
     "correct": [
       " 25"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A client creates a packet to send to a server. The client is requesting HTTPS service. What number will be used as the destination port number in the sending packet?",
@@ -952,6 +1029,7 @@ export const questions = [
     "correct": [
       " 443"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   }
 ]

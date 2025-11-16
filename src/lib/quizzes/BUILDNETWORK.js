@@ -11,7 +11,8 @@ export const questions = [
     "correct": [
       " firewall"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which command will block login attempts on RouterA for a period of 30 seconds if there are 2 failed login attempts within 10 seconds?",
@@ -24,7 +25,8 @@ export const questions = [
     "correct": [
       " RouterA(config)# login block-for 30 attempts 2 within 10"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is the purpose of the network security accounting function?",
@@ -37,7 +39,8 @@ export const questions = [
     "correct": [
       " to keep track of the actions of a user"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What type of attack may involve the use of tools such as nslookup and fping?",
@@ -50,7 +53,62 @@ export const questions = [
     "correct": [
       " reconnaissance attack"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
+  },
+  {
+    "prompt": "Match each weakness with an example. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "1",
+        "term": "security policy weakness",
+        "desc": "The network administrator did not fully consider the implications of unauthorized users accessing the network."
+      },
+      {
+        "id": "2",
+        "term": "configuration weakness",
+        "desc": "When implementing an access list on a router, a network engineer did not filter a type of malicous traffic."
+      },
+      {
+        "id": "3",
+        "term": "technological weakness",
+        "desc": "A nework engineer is examining the operating system of a network device for vulnerabilities."
+      },
+      {
+        "id": "4",
+        "term": "step 4",
+        "desc": "Client send ACK"
+      }
+    ],
+    "img": null,
+    "type": "match"
+  },
+  {
+    "prompt": "Match the type of information security threat to the scenario. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "1",
+        "term": "information theft",
+        "desc": "Obtaining trade secret documents illegally"
+      },
+      {
+        "id": "2",
+        "term": "identity theft",
+        "desc": "Pretending to be someone else by using stolen personal information to apply for a credit card"
+      },
+      {
+        "id": "3",
+        "term": "data loss",
+        "desc": "Installing cirus code to destroy surveillance recordings for certain days"
+      },
+      {
+        "id": "4",
+        "term": "disruption of service",
+        "desc": "Preventing users from accessing a website by sending a large number of link requests in a short period"
+      }
+    ],
+    "img": null,
+    "type": "match"
   },
   {
     "question": "Which example of malicious code would be classified as a Trojan horse?",
@@ -63,7 +121,8 @@ export const questions = [
     "correct": [
       " malware that was written to look like a video game"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is the difference between a virus and a worm?",
@@ -76,7 +135,8 @@ export const questions = [
     "correct": [
       " Worms self-replicate but viruses do not."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which attack involves a compromise of data that occurs between two end points?",
@@ -89,7 +149,8 @@ export const questions = [
     "correct": [
       " man-in-the-middle attack"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which type of attack involves an adversary attempting to gather information about a network to identify vulnerabilities?",
@@ -102,7 +163,35 @@ export const questions = [
     "correct": [
       " reconnaissance"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
+  },
+  {
+    "prompt": "Match the description to the type of firewall filtering. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "1",
+        "term": "packet filtering",
+        "desc": "prevents or allows access based on the IP or MAC addresses of the source and destination"
+      },
+      {
+        "id": "2",
+        "term": "URL filtering",
+        "desc": "prevents or allows access based on web addresses or keywords"
+      },
+      {
+        "id": "3",
+        "term": "stateful packet inspection",
+        "desc": "prevents or allows access based on whether the traffic is in response to requests from internal hosts"
+      },
+      {
+        "id": "4",
+        "term": "application filtering",
+        "desc": "prevents or allows access based on the port numbers used in the request"
+      }
+    ],
+    "img": null,
+    "type": "match"
   },
   {
     "question": "What is the purpose of the network security authentication function?",
@@ -115,7 +204,8 @@ export const questions = [
     "correct": [
       " to require users to prove who they are"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which firewall feature is used to ensure that packets coming into a network are legitimate responses to requests initiated from internal hosts?",
@@ -128,7 +218,8 @@ export const questions = [
     "correct": [
       " stateful packet inspection"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "When applied to a router, which command would help mitigate brute-force password attacks against the router?",
@@ -141,7 +232,40 @@ export const questions = [
     "correct": [
       " login block-for 60 attempts 5 within 60"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
+  },
+  {
+    "prompt": "Identify the steps needed to configure a switch for SSH. The answer order does not matter. (Not all options are used.)",
+    "pairs": [
+      {
+        "id": "1",
+        "term": "Step 1",
+        "desc": "Create a local user"
+      },
+      {
+        "id": "2",
+        "term": "Step 2",
+        "desc": "Generate RSA keys."
+      },
+      {
+        "id": "1",
+        "term": "Step 3",
+        "desc": "Configure a domain name"
+      },
+      {
+        "id": "1",
+        "term": "Step 4",
+        "desc": "use the login local command"
+      },
+      {
+        "id": "1",
+        "term": "Step 5",
+        "desc": "use the transport input ssh command"
+      }
+    ],
+    "img": null,
+    "type": "match"
   },
   {
     "question": "What feature of SSH makes it more secure than Telnet for a device management connection?",
@@ -154,7 +278,8 @@ export const questions = [
     "correct": [
       " login information and data encryption"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is the advantage of using SSH over Telnet?",
@@ -167,7 +292,8 @@ export const questions = [
     "correct": [
       " SSH provides secure communications to access hosts."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is the role of an IPS?",
@@ -180,7 +306,8 @@ export const questions = [
     "correct": [
       " detecting and blocking of attacks in real time"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A user is redesigning a network for a small company and wants to ensure security at a reasonable price. The user deploys a new application-aware firewall with intrusion detection capabilities on the ISP connection. The user installs a second firewall to separate the company network from the public network. Additionally, the user installs an IPS on the internal network of the company. What approach is the user implementing?",
@@ -193,7 +320,8 @@ export const questions = [
     "correct": [
       " layered"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is an accurate description of redundancy?",
@@ -206,7 +334,8 @@ export const questions = [
     "correct": [
       " designing a network to use multiple paths between switches to ensure there is no single point of failure"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A network administrator is upgrading a small business network to give high priority to real-time applications traffic. What two types of network services is the network administrator trying to accommodate? (Choose two.)",
@@ -221,7 +350,8 @@ export const questions = [
       " voice",
       " video"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is the purpose of a small company using a protocol analyzer utility to capture network traffic on the network segments where the company is considering a network upgrade?",
@@ -234,7 +364,8 @@ export const questions = [
     "correct": [
       " to document and analyze network traffic requirements on each network segment"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. An administrator is testing connectivity to a remote device with the IP address 10.1.1.1. What does the output of this command indicate?",
@@ -247,7 +378,8 @@ export const questions = [
     "correct": [
       " A router along the path did not have a route to the destination."
     ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i204753v1n2_Question209-1.png"
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i204753v1n2_Question209-1.png",
+    "type": "mcq"
   },
   {
     "question": "Which method is used to send a ping message specifying the source address for the ping?",
@@ -260,7 +392,8 @@ export const questions = [
     "correct": [
       " Issue the ping command without specifying a destination IP address."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A network engineer is analyzing reports from a recently performed network baseline. Which situation would depict a possible latency issue?",
@@ -273,7 +406,8 @@ export const questions = [
     "correct": [
       " an increase in host-to-host ping response times"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which statement is true about Cisco IOS ping indicators?",
@@ -286,7 +420,8 @@ export const questions = [
     "correct": [
       " ‘U’ may indicate that a router along the path did not contain a route to the destination address and that the ping was unsuccessful."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A user reports a lack of network connectivity. The technician takes control of the user machine and attempts to ping other computers on the network and these pings fail. The technician pings the default gateway and that also fails. What can be determined for sure by the results of these tests?",
@@ -299,7 +434,8 @@ export const questions = [
     "correct": [
       " Nothing can be determined for sure at this point."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A network technician issues the C:\\> tracert -6 www.cisco.com command on a Windows PC. What is the purpose of the -6 command option?",
@@ -312,7 +448,8 @@ export const questions = [
     "correct": [
       " It forces the trace to use IPv6."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Why would a network administrator use the tracert utility?",
@@ -325,7 +462,8 @@ export const questions = [
     "correct": [
       " to identify where a packet was lost or delayed on a network"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A ping fails when performed from router R1 to directly connected router R2. The network administrator then proceeds to issue the show cdp neighbors command. Why would the network administrator issue this command if the ping failed between the two routers?",
@@ -338,7 +476,8 @@ export const questions = [
     "correct": [
       " The network administrator wants to verify Layer 2 connectivity."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A network engineer is troubleshooting connectivity issues among interconnected Cisco routers and switches. Which command should the engineer use to find the IP address information, host name, and IOS version of neighboring network devices?",
@@ -351,7 +490,8 @@ export const questions = [
     "correct": [
       " show cdp neighbors detail"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What information about a Cisco router can be verified using the show version command?",
@@ -364,7 +504,8 @@ export const questions = [
     "correct": [
       " the value of the configuration register"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which command should be used on a Cisco router or switch to allow log messages to be displayed on remotely connected sessions using Telnet or SSH?",
@@ -377,7 +518,8 @@ export const questions = [
     "correct": [
       " terminal monitor"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which command can an administrator issue on a Cisco router to send debug messages to the vty lines?",
@@ -390,7 +532,8 @@ export const questions = [
     "correct": [
       " terminal monitor"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "By following a structured troubleshooting approach, a network administrator identified a network issue after a conversation with the user. What is the next step that the administrator should take?",
@@ -403,7 +546,8 @@ export const questions = [
     "correct": [
       " Establish a theory of probable causes."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Users are complaining that they are unable to browse certain websites on the Internet. An administrator can successfully ping a web server via its IP address, but cannot browse to the domain name of the website. Which troubleshooting tool would be most useful in determining where the problem is?",
@@ -416,7 +560,8 @@ export const questions = [
     "correct": [
       " nslookup"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An employee complains that a Windows PC cannot connect to the Internet. A network technician issues the ipconfig command on the PC and is shown an IP address of 169.254.10.3. Which two conclusions can be drawn? (Choose two.)",
@@ -431,7 +576,8 @@ export const questions = [
       " The PC cannot contact a DHCP server.",
       " The PC is configured to obtain an IP address automatically."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. Host H3 is having trouble communicating with host H1. The network administrator suspects a problem exists with the H3 workstation and wants to prove that there is no problem with the R2 configuration. What tool could the network administrator use on router R2 to prove that communication exists to host H1 from the interface on R2, which is the interface that H3 uses when communicating with remote networks?",
@@ -444,7 +590,8 @@ export const questions = [
     "correct": [
       " an extended ping"
     ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i350256v1n4_208086.jpg"
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i350256v1n4_208086.jpg",
+    "type": "mcq"
   },
   {
     "question": "Refer to the exhibit. Baseline documentation for a small company had ping round trip time statistics of 36/97/132 between hosts H1 and H3. Today the network administrator checked connectivity by pinging between hosts H1 and H3 that resulted in a round trip time of 1458/2390/6066. What does this indicate to the network administrator?",
@@ -458,7 +605,8 @@ export const questions = [
     "correct": [
       " Something is causing a time delay between the networks."
     ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i350257v1n2_208088.jpg"
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/i350257v1n2_208088.jpg",
+    "type": "mcq"
   },
   {
     "question": "Which network service automatically assigns IP addresses to devices on the network?",
@@ -471,7 +619,8 @@ export const questions = [
     "correct": [
       " DHCP"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which command can an administrator execute to determine what interface a router will use to reach remote networks?",
@@ -484,7 +633,8 @@ export const questions = [
     "correct": [
       " show ip route"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "On which two interfaces or ports can security be improved by configuring executive timeouts? (Choose two.)",
@@ -499,7 +649,8 @@ export const questions = [
       " console ports",
       " vty ports"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "When configuring SSH on a router to implement secure network management, a network engineer has issued the login local and transport input ssh line vty commands. What three additional configuration actions have to be performed to complete the SSH configuration? (Choose three.)",
@@ -516,7 +667,8 @@ export const questions = [
       " Configure the correct IP domain name.",
       " Create a valid local username and password database."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is considered the most effective way to mitigate a worm attack?",
@@ -529,7 +681,8 @@ export const questions = [
     "correct": [
       " Download security updates from the operating system vendor and patch all vulnerable systems."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Which statement describes the ping and tracert commands?",
@@ -542,7 +695,8 @@ export const questions = [
     "correct": [
       " Tracert shows each hop, while ping shows a destination reply only."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A technician is to document the current configurations of all network devices in a college, including those in off-site buildings. Which protocol would be best to use to securely access the network devices?",
@@ -555,7 +709,8 @@ export const questions = [
     "correct": [
       " SSH"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Open the PT Activity. Perform the tasks in the activity instructions and then answer the question.\nWhich command has to be configured on the router to complete the SSH configuration?",
@@ -568,7 +723,8 @@ export const questions = [
     "correct": [
       " transport input ssh"
     ],
-    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/CCNA-1-v7-Modules-16-17-Building-and-Securing-a-Small-Network-Exam.jpg"
+    "img": "https://itexamanswers.net/wp-content/uploads/2019/12/CCNA-1-v7-Modules-16-17-Building-and-Securing-a-Small-Network-Exam.jpg",
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “WhatAreyouwaiting4” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -581,7 +737,8 @@ export const questions = [
     "correct": [
       " It is strong because it uses a passphrase."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “pR3s!d7n&0” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -594,7 +751,8 @@ export const questions = [
     "correct": [
       " It is strong because it uses a minimum of 10 numbers, letters and special characters."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “5$7*4#033!” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -607,7 +765,8 @@ export const questions = [
     "correct": [
       " It is strong because it contains 10 numbers and special characters."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “pR3s!d7n&0” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -620,7 +779,8 @@ export const questions = [
     "correct": [
       " It is strong because it uses a minimum of 10 numbers, letters and special characters."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “12345678!” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -633,7 +793,8 @@ export const questions = [
     "correct": [
       " It is weak because it uses a series of numbers or letters."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “admin” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -646,7 +807,8 @@ export const questions = [
     "correct": [
       " It is weak because it is often the default password on new devices."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “Feb121978” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -659,7 +821,8 @@ export const questions = [
     "correct": [
       " It is weak because it uses easily found personal information."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “password” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -672,7 +835,8 @@ export const questions = [
     "correct": [
       " It is weak because it is a commonly used password."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “RobErT” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -685,7 +849,8 @@ export const questions = [
     "correct": [
       " It is weak since it uses easily found personal information."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator decides to use “Elizabeth” as the password on a newly installed router. Which statement applies to the password choice?",
@@ -698,7 +863,8 @@ export const questions = [
     "correct": [
       " It is weak because it uses easily found personal information."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A network technician is troubleshooting an issue and needs to verify the IP addresses of all interfaces on a router. What is the best command to use to accomplish the task?",
@@ -711,7 +877,8 @@ export const questions = [
     "correct": [
       " show ip interface brief"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Students who are connected to the same switch are having slower than normal response times. The administrator suspects a duplex setting issue. What is the best command to use to accomplish the task?",
@@ -724,7 +891,8 @@ export const questions = [
     "correct": [
       " show interfaces"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A user wants to know the IP address of the PC. What is the best command to use to accomplish the task?",
@@ -737,7 +905,8 @@ export const questions = [
     "correct": [
       " ipconfig"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A student wants to save a router configuration to NVRAM. What is the best command to use to accomplish the task?",
@@ -750,7 +919,8 @@ export const questions = [
     "correct": [
       " copy running-config startup-config"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A support technician needs to know the IP address of the wireless interface on a MAC. What is the best command to use to accomplish the task?",
@@ -763,7 +933,8 @@ export const questions = [
     "correct": [
       " ipconfig getifaddr en0"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A network technician is troubleshooting an issue and needs to verify all of the IPv6 interface addresses on a router. What is the best command to use to accomplish the task?",
@@ -776,7 +947,8 @@ export const questions = [
     "correct": [
       " show ipv6 interface"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "A teacher is having difficulties connecting his PC to the classroom network. He needs to verify that a default gateway is configured correctly. What is the best command to use to accomplish the task?",
@@ -789,7 +961,8 @@ export const questions = [
     "correct": [
       " ipconfig"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "Only employees connected to IPv6 interfaces are having difficulty connecting to remote networks. The analyst wants to verify that IPv6 routing has been enabled. What is the best command to use to accomplish the task?",
@@ -802,7 +975,8 @@ export const questions = [
     "correct": [
       " show running-config"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "An administrator is troubleshooting connectivity issues and needs to determine the IP address of a website. What is the best command to use to accomplish the task?",
@@ -815,7 +989,8 @@ export const questions = [
     "correct": [
       " nslookup"
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   },
   {
     "question": "What is a characteristic of UDP?",
@@ -828,6 +1003,7 @@ export const questions = [
     "correct": [
       " UDP reassembles the received datagrams in the order they were received."
     ],
-    "img": null
+    "img": null,
+    "type": "mcq"
   }
 ]
