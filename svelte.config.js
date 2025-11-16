@@ -5,6 +5,9 @@ const dev = process.argv.includes('dev');
 export default {
   kit: {
     adapter: adapter(),
+       alias: {
+      $lib: './src/lib'
+    }
     // paths: {
     //   base: dev ? '' : '/quizz'   // ⬅️ repo name here
     // },
