@@ -33,6 +33,7 @@
 	"dependencies": {
 		"@sveltejs/adapter-node": "^5.4.0",
 		"@sveltejs/adapter-vercel": "^6.1.1",
+		"@vercel/analytics": "^1.5.0",
 		"bcrypt": "^6.0.0",
 		"canvas-confetti": "^1.9.4"
 	}
