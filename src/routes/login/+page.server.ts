@@ -4,7 +4,7 @@ import { fail, redirect, type Cookies } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 
 export const load = async ({ locals }: {locals: any}) => {
-  // Already logged in? send to home
+  // Already logged in? send to homes
   if (locals.user) throw redirect(303, '/');
   return {};
 };
