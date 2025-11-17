@@ -47,7 +47,7 @@ const networkQuiz = {
   questions: networkQuestions
 };
 
-const finalQuiz = {
+export const finalQuiz = {
   title: 'Final QuiZ',
   slug: 'final-quiz',
   description: 'All questions for final exam',
